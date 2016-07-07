@@ -2,10 +2,11 @@
 /data
 /.idea
 /config.yml
-/static
 data.db
 *.pyc
 __pycache__
 .tags
 .tags1
 *.log
+/node_modules
+/build
