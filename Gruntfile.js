@@ -17,7 +17,7 @@ module.exports = function(grunt) {
     },
     shell: {
         compile_index: {
-            command: "cd ..; ./env/bin/python collectordrone/render.py frontend/src/html index.html frontend/build/dist/index.html"
+            command: "./env/bin/python src/util/render.py src/html index.html build/dist/index.html"
         }
     },
     browserify: {
@@ -27,16 +27,11 @@ module.exports = function(grunt) {
       }
     },
     copy: {
-        static: {
-            expand: true,
-            src: ["static/**"],
-            dest: "../"
-        },
         dist: {
             expand: true,
-            cwd: "build/dist/",
+            cwd: "./static",
             src: ["./**"],
-            dest: "../static/"
+            dest: "build/dist/"
         }
     },
     watch: {
@@ -45,8 +40,7 @@ module.exports = function(grunt) {
             'Gruntfile.js',
             'static/css/drone.css',
             'static/css/theme.css',
-            'src/**/*.coffee',
-            'src/html/*.html'
+            'src/**',
         ],
         tasks: ['default'],
         options: {
@@ -66,7 +60,6 @@ module.exports = function(grunt) {
       'coffee:compile',
       'browserify:dist',
       "shell:compile_index",
-      "copy:static",
       "copy:dist"
   ]);
 

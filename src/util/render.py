@@ -14,7 +14,7 @@ def render_templates(base_path, template_name, output, data):
     template = env.get_template(template_name)
     template_data = json.loads(data)
     if output == "-":
-        print template.render(template_data)
+        print(template.render(template_data))
     else:
         with open(output, "w") as fp:
             fp.write(template.render(template_data))
