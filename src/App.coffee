@@ -19,6 +19,7 @@
 ###
 
 AppView = require "./AppView"
+AppRouter = require "./AppRouter"
 FilteredCollection = require "./FilteredCollection"
 PagerModel = require "./PagerModel"
 BlueprintCollection = require "./BlueprintCollection"
@@ -100,34 +101,10 @@ App = ->
     tracking.materials.fetch(reset: true)
     tracking.blueprints.fetch(reset: true)
 
-    Router = Backbone.Router.extend
-        routes:
-            ":section": "viewSection"
-            "library/:view": "libraryView"
-
-        viewSection: (section="tracking")->
-            $section = $("#" + section)
-            if $section.get()
-                $section.addClass("active").siblings().removeClass("active")
-                $("#view-" + section).addClass("active").siblings().removeClass("active")
-                Backbone.trigger("action:section", section)
-            return this
-
-        libraryView: (view="blueprints")->
-            @viewSection "library"
-            $view  = $("#library-" + view)
-            if $view.get()
-                $view.addClass("active").siblings().removeClass("active")
-                $("#view-library-" + view).addClass("active").siblings().removeClass("active")
-                console.info "#view-library-#{view}-filter"
-                $("#library-#{view}-filter").addClass("active").siblings().removeClass("active")
-                Backbone.trigger("action:section", "library:" + view)
-            return this
-
-    @router = new Router()
+    @router = new AppRouter()
     Backbone.history.start()
     new Ga(Backbone)
 
     return this
 
-new App()
+window.app = new App()
