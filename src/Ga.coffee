@@ -17,8 +17,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-### Ga ###
-class Ga
+### Ga
+
+I'm not a big fan of online user tracking (in fact I block google analytics on
+my devices). For collector-drone it's exclusively used to improve
+collector-drone according to user behaviour.
+
+###
+module.exports = class Ga
     constructor: (model)->
         model.on "action:blueprint:track", @sendBlueprintTrack
         model.on "action:blueprint:untrack", @sendBlueprintUntrack
@@ -73,5 +79,3 @@ class Ga
 
     sendScreenView: (view)->
         window.ga "send", "screenview", screenName: view
-
-module.exports = Ga
