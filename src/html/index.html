@@ -63,21 +63,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <div class="container">
 
-  <section id="tracking" class="active">
+  <section id="tracker" class="active">
       <div id="track-toolbar">
         <nav>
           <ul class="nav nav-pills nav-justified" id="track-tab-view">
-            <li class="active"><a href="#track-blueprints" data-toggle="pill">
+            <li id="view-tracker-blueprints" class="active"><a href="#/tracker/blueprints">
               Blueprints (<span class="num-blueprints">0</span>)</a></li>
-            <li><a href="#track-materials" data-toggle="pill">
+            <li id="view-tracker-materials"><a href="#/tracker/materials">
               Materials (<span class="num-materials">0</span>)</a></li>
           </ul>
         </nav>
       </div>
       <div class="tab-content">
         {% include "_introduction.html" %}
-        <div class="tab-pane active row" id="track-blueprints"></div>
-        <div class="tab-pane row" id="track-materials"></div>
+        <div class="tab-pane active row" id="tracker-blueprints"></div>
+        <div class="tab-pane row" id="tracker-materials"></div>
       </div>
   </section>
 
@@ -149,7 +149,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
   ga('create', 'UA-80245677-1', 'auto');
   ga('set', 'appName', 'collector-drone');
-  ga('send', 'screenview', {screenName: 'main'});
+  ga('send', 'screenview', {screenName: 'tracker:blueprints'});
 </script>
 </body>
 </html>

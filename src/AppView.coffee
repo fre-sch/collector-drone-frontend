@@ -29,8 +29,8 @@ module.exports = Backbone.View.extend
     events: {}
     initialize: (options) ->
         {@blueprints, @materials} = options
-        @$trackMaterials = $("#track-materials")
-        @$trackBlueprints = $("#track-blueprints")
+        @$trackMaterials = $("#tracker-materials")
+        @$trackBlueprints = $("#tracker-blueprints")
 
         @listenTo tracking.blueprints, "add", @addTrackBlueprint
         @listenTo tracking.materials, "add", @addTrackMaterial
