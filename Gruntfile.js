@@ -38,15 +38,24 @@ module.exports = function(grunt) {
       scripts: {
         files: [
             'Gruntfile.js',
-            'static/css/drone.css',
-            'static/css/theme.css',
-            'src/**',
+            'src/**'
         ],
         tasks: ['default'],
         options: {
           spawn: false,
         },
       },
+    },
+    connect: {
+      server: {
+        options: {
+          port: 8000,
+          hostname: '*',
+          base: 'build/dist',
+          directory: 'build/dist',
+          livereload: true
+        }
+      }
     }
   });
 
@@ -55,12 +64,18 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   grunt.registerTask('default', [
       'coffee:compile',
       'browserify:dist',
       "shell:compile_index",
       "copy:dist"
+  ]);
+
+  grunt.registerTask('serve', [
+      'connect:server',
+      'watch:scripts'
   ]);
 
 };
