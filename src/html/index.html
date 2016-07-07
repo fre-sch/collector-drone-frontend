@@ -64,6 +64,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 <div class="container">
 
   <section id="tracker" class="active">
+      <div class="section-head section-head-1 container">
       <div id="track-toolbar">
         <nav>
           <ul class="nav nav-pills nav-justified" id="track-tab-view">
@@ -74,6 +75,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
           </ul>
         </nav>
       </div>
+      </div>
       <div class="tab-content">
         {% include "_introduction.html" %}
         <div class="tab-pane active row" id="tracker-blueprints"></div>
@@ -82,7 +84,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   </section>
 
   <section id="library">
-      <div class="section-head">
+      <div class="section-head section-head-2 container">
           <nav id="resource-filter-tabs">
             <ul class="nav nav-pills nav-justified">
               <li id="view-library-blueprints" class="active"><a href="#/library/blueprints">Blueprints
@@ -127,18 +129,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   </div>
   </section>
 
-  <footer class="text-muted small text-center">
-    <p>Unofficial companion web-app for Elite: Dangerous (property of Frontier
-    Developments). Collector-Drone lets you manage blueprints and material
-    inventory for crafting engineer upgrades.<br/>
-    Data pulled from <a href="https://forums.frontier.co.uk/showthread.php/248275">Engineering Database &amp; Calculator</a>
-    gathered by <a href="https://forums.frontier.co.uk/member.php/118579-Qohen-Leth">Qohen-Leth</a>.
-    Icons and colors by <a href="http://www.edassets.org/">edassets.org</a>.<br/>
-    Checkout the <a href="https://github.com/fre-sch/collector-drone">source at github</a>.<br/>
-    UI/UX Concept by Carina Lea Meyer<br/>
-    Copyright &copy; 2016 Frederik Schumacher<br/>
-    </p>
-  </footer>
+  {% include "_about.html" %}
 </div>
 
 <script src="js/dist/app.js" charset="utf-8"></script>

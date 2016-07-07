@@ -38,7 +38,8 @@ module.exports = function(grunt) {
       scripts: {
         files: [
             'Gruntfile.js',
-            'src/**'
+            'src/**',
+            'static/**'
         ],
         tasks: ['default'],
         options: {

@@ -23,12 +23,15 @@ module.exports = Backbone.Router.extend
     routes:
         "tracker(/:view)": "trackerView"
         "library(/:view)": "libraryView"
+        ":section": "viewScreen"
 
     viewScreen: (section)->
+        console.info "view screen", section
         $section = $("#" + section)
         if $section.get()
             $section.addClass("active").siblings().removeClass("active")
-            $("#view-" + section).addClass("active").siblings().removeClass("active")
+            $("#main-navbar li").removeClass("active")
+            $("#view-" + section).addClass("active")
         return this
 
     trackerView: (view="blueprints")->
