@@ -3395,7 +3395,7 @@ a.label:hover, a.label:focus {
 .badge {
     display: inline-block;
     min-width: 10px;
-    padding: 2px 0.4em;
+    padding: .2em .4em;
     font-size: 14px;
     font-weight: normal;
     color: rgb(226, 106, 10);
@@ -3403,7 +3403,7 @@ a.label:hover, a.label:focus {
     white-space: nowrap;
     text-align: center;
     background-color: rgb(83, 46, 18);
-    border-radius: 1px;
+    border-radius: 1em;
     vertical-align: middle;
     text-transform: uppercase;
     margin-bottom: 0.2em;

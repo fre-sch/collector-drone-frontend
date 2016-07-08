@@ -255,3 +255,21 @@ section.active {
         padding-top: 97px;
     }
 }
+.panel {
+    position: relative;
+}
+.drone-flash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+}
+.drone-flash-text {
+    position: absolute;
+    width: 100%;
+    top: 40%;
+    text-align: center;
+}

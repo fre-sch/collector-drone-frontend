@@ -36,5 +36,9 @@ module.exports = Backbone.View.extend
 
     track: (event)->
         tracking.trackBlueprint(@model)
+        @$el.find(".drone-flash")
+            .fadeToggle("fast")
+            .delay(400)
+            .fadeToggle("fast")
         event.preventDefault()
         return this

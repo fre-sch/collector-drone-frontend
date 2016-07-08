@@ -1,0 +1,45 @@
+<section id="library">
+    <div class="section-head section-head-2 container">
+        <nav id="resource-filter-tabs">
+            <ul class="nav nav-pills nav-justified">
+                <li id="view-library-blueprints" class="active"><a href="#/library/blueprints">Blueprints
+                    (<span class="num-blueprints">0</span>)</a>
+                </li>
+                <li id="view-library-materials"><a href="#/library/materials">Materials
+                    (<span class="num-materials">0</span>)</a></li>
+            </ul>
+        </nav>
+        <div class="tab-content">
+            {% include "_blueprints-filter.html" %}
+            {% include "_materials-filter.html" %}
+        </div>
+    </div>
+
+    <div class="tab-content">
+        <div id="library-blueprints" class="tab-pane active">
+            <div class="collection-items row"></div>
+            <div class="clearfix drone-pagination" style="margin-bottom:1em;">
+                <a href="#" class="btn btn-default previous pull-left"><span
+                    class="glyphicon glyphicon-chevron-left"></span><span
+                    class="hidden-xs hidden-sm"> Previous</span></a>
+                <a href="#" class="btn btn-default next pull-right"><span
+                    class="hidden-xs hidden-sm">Next </span><span
+                    class="glyphicon glyphicon-chevron-right"></span></a>
+                <div class="drone-pages"></div>
+            </div>
+        </div>
+
+        <div id="library-materials" class="tab-pane">
+            <div class="collection-items row"></div>
+            <div class="clearfix drone-pagination" style="margin-bottom:1em;">
+                <a href="#" class="btn btn-default previous pull-left"><span
+                    class="glyphicon glyphicon-chevron-left"></span><span
+                    class="hidden-xs hidden-sm"> Previous</span></a>
+                <a href="#" class="btn btn-default next pull-right"><span
+                    class="hidden-xs hidden-sm">Next </span><span
+                    class="glyphicon glyphicon-chevron-right"></span></a>
+                <div class="drone-pages"></div>
+            </div>
+        </div>
+    </div>
+</section>
