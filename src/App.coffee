@@ -48,7 +48,7 @@ fix_stuck_materials = ()->
 
 
 ### 2016-07-09 ###
-fix_removed_blueprints = (blueprints)->
+fix_removed_blueprints = ()->
     trackBlueprint = localStorage.getItem("trackBlueprint")
     if trackBlueprint
         ids = trackBlueprint.split ","
@@ -62,12 +62,30 @@ fix_removed_blueprints = (blueprints)->
             localStorage.removeItem "trackBlueprint"
     return
 
+
+### 2016-07-09 ###
+fix_removed_materials = ()->
+    trackMaterial = localStorage.getItem("trackMaterial")
+    if trackMaterial
+        ids = trackMaterial.split ","
+        for id in trackMaterial.split ","
+            if not _.findWhere(CollectorDroneData.materials, id: parseInt(id))
+                ids = _.without(ids, id)
+                localStorage.removeItem "trackMaterial-#{id}"
+        if ids.length
+            localStorage.setItem "trackMaterial", ids.join(",")
+        else
+            localStorage.removeItem "trackMaterial"
+    return
+
+
 localDataVersion = ()->
     localStorage.getItem("dataVersion") ? "beta"
 
 
 data_migrate = ()->
     fix_removed_blueprints()
+    fix_removed_materials()
     fix_stuck_materials()
     prevVersion = localDataVersion()
     if prevVersion != CollectorDroneData.version
