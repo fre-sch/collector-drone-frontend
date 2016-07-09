@@ -34,6 +34,7 @@ module.exports = class Ga
         model.on "action:blueprint:filter", @sendBlueprintFilter
         model.on "action:material:filter", @sendMaterialFilter
         model.on "action:section", @sendScreenView
+        model.on "action:migrate", @sendMigrateEvent
 
     sendBlueprintTrack: ()->
         window.ga "send", "event",
@@ -79,3 +80,9 @@ module.exports = class Ga
 
     sendScreenView: (view)->
         window.ga "send", "screenview", screenName: view
+
+    sendMigrateEvent: (prev, next)->
+        window.ga "send", "event",
+            eventCategory: "migrate"
+            eventAction: "update"
+            evenLabel: "Migrate #{prev} -> #{next}"

@@ -36,27 +36,53 @@ inventory = require './inventory'
 Ga = require './Ga'
 
 
+### 2016-07-04 ###
 fix_stuck_materials = ()->
-    tbp = localStorage.getItem "trackBlueprint"
-    tm = localStorage.getItem "trackMaterial"
-    if tbp?.length == 0 and tm?.length > 0
-        for id in tm.split ","
+    trackBlueprint = localStorage.getItem "trackBlueprint"
+    trackMaterial = localStorage.getItem "trackMaterial"
+    if not trackBlueprint?.length and trackMaterial?.length
+        for id in trackMaterial.split ","
             localStorage.removeItem "trackMaterial-#{id}"
         localStorage.removeItem "trackMaterial"
     return
 
 
+### 2016-07-09 ###
 fix_removed_blueprints = (blueprints)->
-    for tbp in tracking.blueprints.models
-        if not blueprints.get(tbp.id)
-            tracking.untrackBlueprint(tbp)
+    trackBlueprint = localStorage.getItem("trackBlueprint")
+    if trackBlueprint
+        ids = trackBlueprint.split ","
+        for id in trackBlueprint.split ","
+            if not _.findWhere(CollectorDroneData.blueprints, id: parseInt(id))
+                ids = _.without(ids, id)
+                localStorage.removeItem "trackBlueprint-#{id}"
+        if ids.length
+            localStorage.setItem "trackBlueprint", ids.join(",")
+        else
+            localStorage.removeItem "trackBlueprint"
+    return
+
+localDataVersion = ()->
+    localStorage.getItem("dataVersion") ? "beta"
+
+
+data_migrate = ()->
+    fix_removed_blueprints()
+    fix_stuck_materials()
+    prevVersion = localDataVersion()
+    if prevVersion != CollectorDroneData.version
+        console.info "update found, migrate #{prevVersion} -> #{CollectorDroneData.version}"
+        localStorage.setItem "dataVersion", CollectorDroneData.version
+        Backbone.trigger "action:migrate", prevVersion, CollectorDroneData.version
+
+    $("#drone-data-version").html(localDataVersion())
 
 
 ### App.js ###
 App = ->
     $.ajaxSetup(contentType: "application/json")
 
-    fix_stuck_materials()
+    data_migrate()
 
     blueprintsFilter = new BlueprintsFilter
     blueprintsFiltered = FilteredCollection(
@@ -107,8 +133,6 @@ App = ->
     materialsFiltered._source.reset(CollectorDroneData.materials)
     tracking.materials.fetch(reset: true)
     tracking.blueprints.fetch(reset: true)
-
-    fix_removed_blueprints(blueprintsFiltered._source)
 
     @router = new AppRouter()
     Backbone.history.start()
