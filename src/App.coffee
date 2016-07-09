@@ -37,13 +37,20 @@ Ga = require './Ga'
 
 
 fix_stuck_materials = ()->
-    tbp = localStorage.getItem("trackBlueprint")
-    tm = localStorage.getItem("trackMaterial")
+    tbp = localStorage.getItem "trackBlueprint"
+    tm = localStorage.getItem "trackMaterial"
     if tbp?.length == 0 and tm?.length > 0
         for id in tm.split ","
-            localStorage.removeItem("trackMaterial-#{id}")
-        localStorage.removeItem("trackMaterial")
+            localStorage.removeItem "trackMaterial-#{id}"
+        localStorage.removeItem "trackMaterial"
     return
+
+
+fix_removed_blueprints = (blueprints)->
+    for tbp in tracking.blueprints.models
+        if not blueprints.get(tbp.id)
+            tracking.untrackBlueprint(tbp)
+
 
 ### App.js ###
 App = ->
@@ -100,6 +107,8 @@ App = ->
     materialsFiltered._source.reset(CollectorDroneData.materials)
     tracking.materials.fetch(reset: true)
     tracking.blueprints.fetch(reset: true)
+
+    fix_removed_blueprints(blueprintsFiltered._source)
 
     @router = new AppRouter()
     Backbone.history.start()

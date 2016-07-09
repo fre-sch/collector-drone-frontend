@@ -26,7 +26,6 @@ module.exports = Backbone.Router.extend
         ":section": "viewScreen"
 
     viewScreen: (section)->
-        console.info "view screen", section
         $section = $("#" + section)
         if $section.get()
             $section.addClass("active").siblings().removeClass("active")

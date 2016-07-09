@@ -221,7 +221,8 @@ section.active {
     position: fixed;
     background: rgb(33, 27, 21);
     z-index: 1030;
-    padding: 16px 8px 8px 0;
+    padding: 16px 0 8px 0;
+    width: 100%;
 }
 .section-head-1 {
     padding-bottom: 0;
@@ -236,7 +237,7 @@ section.active {
     margin-top: 8px;
 }
 @media only screen and (min-width: 767px) {
-    .section-head { padding-right: 16px }
+    /*.section-head { padding-right: 16px }*/
     .section-head-1 + .tab-content {
         padding-top: 57px;
     }
