@@ -10,3 +10,5 @@ __pycache__
 *.log
 /node_modules
 /build
+*.sublime-project
+*.sublime-workspace
