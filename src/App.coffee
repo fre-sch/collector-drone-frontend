@@ -110,16 +110,6 @@ App = ->
     materialsFiltered = FilteredCollection(
         new MaterialCollection, materialsFilter)
 
-    @blueprintsCollectionView = new BlueprintsCollectionView
-        model: blueprintsFiltered
-        filter: blueprintsFilter
-        pager: new PagerModel(collection: blueprintsFiltered)
-
-    @materialsCollectionView = new MaterialsCollectionView
-        model: materialsFiltered
-        filter: materialsFilter
-        pager: new PagerModel(collection: materialsFiltered)
-
     blueprintsFilterView = new BlueprintsFilterView
         el: $("#library-blueprints-filter")
         model: blueprintsFilter
@@ -146,13 +136,25 @@ App = ->
         blueprints: blueprintsFiltered
         materials: materialsFiltered
 
-    inventory.fetch(reset: true)
-    blueprintsFiltered._source.reset(CollectorDroneData.blueprints)
-    materialsFiltered._source.reset(CollectorDroneData.materials)
+    inventory.load()
+    blueprintsFiltered.resetSource CollectorDroneData.blueprints
+    materialsFiltered.resetSource CollectorDroneData.materials
     tracking.materials.fetch(reset: true)
     tracking.blueprints.fetch(reset: true)
 
-    @router = new AppRouter()
+    @blueprintsCollectionView = new BlueprintsCollectionView
+        el: $("#library-blueprints .collection-items")
+        model: blueprintsFiltered
+        filter: blueprintsFilter
+        pager: new PagerModel(collection: blueprintsFiltered)
+
+    @materialsCollectionView = new MaterialsCollectionView
+        el: $("#library-materials .collection-items")
+        model: materialsFiltered
+        filter: materialsFilter
+        pager: new PagerModel(collection: materialsFiltered)
+
+    @router = new AppRouter({blueprintsFiltered, materialsFiltered})
     Backbone.history.start()
     new Ga(Backbone)
 

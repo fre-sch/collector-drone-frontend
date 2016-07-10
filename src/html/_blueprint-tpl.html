@@ -7,6 +7,7 @@
         <span class="hidden-xs hidden-sm"><span class="badge"><%=type%></span></span>
       </div>
     </div>
+    <div class="drone-blueprint-completion" style="width:<%=completion%>%"></div>
     <div class="panel-body" style="white-space: nowrap">
       <div class="visible-xs-block visible-sm-block">
           <span class="badge"><%=type%></span>
@@ -14,7 +15,10 @@
       <% for (var i=0; i < ingredients.length; ++i) { %>
       <div class="row" style="font-size: 0.9em">
         <div class="col-xs-8"><%= ingredients[i].material.title %></div>
-        <div class="col-xs-4 text-right"><%= ingredients[i].quantity %></div>
+        <div class="col-xs-4 text-right">
+          <%= ingredients[i].inventory ?  ingredients[i].inventory+" / " : "" %>
+          <%= ingredients[i].quantity %>
+        </div>
       </div>
       <% } %>
     </div>

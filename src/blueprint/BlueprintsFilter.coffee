@@ -44,6 +44,8 @@ module.exports = Backbone.Model.extend
         sort = @get "sort"
         if sort
             [field, dir] = sort.split(",")
+            if field == "completion"
+                return (model) -> -model.completion()
             if dir == "desc"
                 return (a, b) -> utils.cmp(b.get(field), a.get(field))
             else if dir == "asc"

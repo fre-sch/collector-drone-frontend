@@ -65,7 +65,7 @@ module.exports = Backbone.View.extend
             view = new TrackMaterialView
                 model: trackMaterial
                 material: material
-                inventory: inventory.getOrCreate(trackMaterial.id)
+                inventory: inventory.getItem(trackMaterial.id)
             $("#introduction").hide()
             @$trackMaterials.append(view.render().el)
             return

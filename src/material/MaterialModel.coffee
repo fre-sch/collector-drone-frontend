@@ -37,4 +37,4 @@ module.exports = Backbone.Model.extend
             else @get("type")
 
     inventoryQuantity: ->
-        -inventory.getOrCreate(@get "id").get("quantity")
+        -inventory.get(@get "id")

@@ -15,6 +15,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+inventory = require "./inventory"
 
 
 ### BlueprintModel ###
@@ -23,4 +24,12 @@ module.exports = Backbone.Model.extend
         title: "",
         ingredients: []
         engineers: {}
-        tracked: false
+
+    completion: ()->
+        total = 0
+        complete = 0
+        for ingredient in @get "ingredients"
+            required = ingredient.quantity
+            total += required
+            complete += Math.min(required, inventory.get ingredient.material.id)
+        parseInt Math.min(100, (complete / total) * 100)

@@ -21,28 +21,24 @@ BlueprintView = require './BlueprintView'
 
 ### BlueprintsCollectionView ###
 module.exports = Backbone.View.extend
-    el: $("#library-blueprints .collection-items")
-
     initialize: (options) ->
         {@filter, @pager} = options
-        @filter.on "change", => @pager.set offset: 0
+        @pager.listenTo @filter, "change", @pager.reset
+
         new PagerView
-            el: "#library-blueprints .drone-pagination"
+            el: @$el.parent().find(".drone-pagination")
             model: @pager
 
         @listenTo @model, "reset", @render
-        @listenTo @pager, "change", @render
+        @listenTo @pager, "change:current", @render
         return this
 
-    render: ->
-        @$el.empty()
+    render: ()->
         begin = @pager.offset()
         end = @pager.offset() + @pager.get("limit")
-        @createItemView model, i for model, i in @model.slice begin, end
-        return this
-
-    createItemView: (model, i) ->
-        view = new BlueprintView(model: model)
-        el = view.render().el
-        @$el.append el
+        fragment = document.createDocumentFragment()
+        for model, i in @model.slice begin, end
+            view = new BlueprintView(model: model)
+            fragment.appendChild(view.render().el)
+        @$el.empty().append(fragment)
         return this

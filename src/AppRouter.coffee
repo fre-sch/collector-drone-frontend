@@ -25,6 +25,9 @@ module.exports = Backbone.Router.extend
         "library(/:view)": "libraryView"
         ":section": "viewScreen"
 
+    initialize: (options)->
+        {@blueprintsFiltered, @materialsFiltered} = options
+
     viewScreen: (section)->
         $section = $("#" + section)
         if $section.get()
@@ -50,4 +53,9 @@ module.exports = Backbone.Router.extend
             $("#view-library-" + view).addClass("active").siblings().removeClass("active")
             $("#library-#{view}-filter").addClass("active").siblings().removeClass("active")
             Backbone.trigger("action:section", "library:" + view)
+        if view == "blueprints"
+            @blueprintsFiltered.refresh()
+        else if view == "materials"
+            @materialsFiltered.refresh()
+
         return this

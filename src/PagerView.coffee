@@ -29,6 +29,7 @@ module.exports = Backbone.View.extend
             class="page page-<%=page%><%=(active?" active":"")%>"><%=page%></a>""")
 
     initialize: ->
+        @pagesChanged()
         @listenTo @model, "change:pages", @pagesChanged
         @listenTo @model, "change:current", @currentChanged
 

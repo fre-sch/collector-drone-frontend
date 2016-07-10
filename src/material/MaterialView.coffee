@@ -33,19 +33,27 @@ module.exports = Backbone.View.extend
         "click .btn.track": "track"
 
     initialize: (options) ->
-        @inventoryItem = (inventory.get(@model.id) or
-            inventory.create(id: @model.id, quantity: 0))
-        @listenTo @inventoryItem, "change", @render
-        @listenTo @model, "change", @render
+        @inventoryItem = inventory.getItem @model.id
+        @listenTo @inventoryItem, "change", @update
+        # @listenTo @model, "change", @render
         @listenTo @model, "destroy", @remove
         this
 
     render: ->
         data = @model.toJSON()
         data.typeLabel = @model.typeLabel()
-        data.inventory = if @inventoryItem then @inventoryItem.get("quantity") else 0
+        data.inventory = @inventoryItem.get("quantity")
+        if not data.inventory
+            data.inventory = ""
         @$el.html @template(data)
         this
+
+    update: (inventoryItem)->
+        inventoryQuantity = inventoryItem.get("quantity")
+        if not inventoryQuantity
+            inventoryQuantity = ""
+        @$el.find(".inventory").html(inventoryQuantity)
+        return this
 
     inventoryPlus: (event)->
         @inventoryItem.quantityPlus 1

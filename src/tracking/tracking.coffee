@@ -79,6 +79,5 @@ class TrackingController
         return this
 
 
-
 ### tracking Singleton ###
 module.exports = new TrackingController

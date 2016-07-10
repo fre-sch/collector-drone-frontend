@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 tracking = require './tracking'
+inventory = require './inventory'
 
 
 ### BlueprintView ###
@@ -27,12 +28,21 @@ module.exports = Backbone.View.extend
         "click a.track": "track"
 
     initialize: (options) ->
-        @listenTo @model, "change", @render
         @listenTo @model, "destroy", @remove
 
     render: ->
-        @$el.html @template(@model.toJSON())
+        data = @model.toJSON()
+        for ingredient in data.ingredients
+            ingredient.inventory = inventory.get ingredient.material.id
+        data.completion = @model.completion()
+        @$el.html @template(data)
         return this
+
+    # update: ()->
+    #     completion = @model.completion()
+    #     console.info "update blueprint, completion", completion
+    #     @$el.find(".drone-blueprint-completion").css(width: completion + "%")
+    #     return this
 
     track: (event)->
         tracking.trackBlueprint(@model)

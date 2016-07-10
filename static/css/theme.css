@@ -121,9 +121,6 @@ button::-moz-focus-inner, input::-moz-focus-inner {
     border: 0;
     padding: 0;
 }
-input {
-    line-height: normal;
-}
 input[type="checkbox"], input[type="radio"] {
     box-sizing: border-box;
     padding: 0;
@@ -220,21 +217,6 @@ td, th {
     .table-bordered th, .table-bordered td {
         border: 1px solid #ddd !important;
     }
-}
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-*:before, *:after {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-input, button, select, textarea {
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
 }
 a {
     color: #0a8bd6;
@@ -3852,10 +3834,11 @@ a.list-group-item-danger.active, button.list-group-item-danger.active, a.list-gr
 .panel-body {
     padding: 4px;
     color: rgb(255,113,0);
+    border-top: 1px solid rgb(255,113,0);
 }
 .panel-heading {
     padding: 4px 4px 2px 4px;
-    border-bottom: 1px solid transparent;
+    border-bottom: none;
     border-top-right-radius: -1;
     border-top-left-radius: -1;
 }
@@ -5072,7 +5055,6 @@ label, .radio label, .checkbox label, .help-block {
 }
 .panel-default> .panel-heading {
     background-color: transparent;
-    border-bottom: 1px solid rgb(255,113,0);
     color: rgb(255,113,0);
     border-radius: 0;
     font-weight: bold;

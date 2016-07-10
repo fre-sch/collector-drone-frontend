@@ -47,6 +47,7 @@ module.exports = Backbone.View.extend
             {label: "Type Z-A", value: "type,desc"}
             {label: "Level 0-9", value: "level,asc"}
             {label: "Level 9-0", value: "level,desc"}
+            {label: "Completion", value: "completion,desc"}
         ]
 
         @listenTo @typeMenuModel, "change:selected", @updateFilterModel
@@ -55,9 +56,10 @@ module.exports = Backbone.View.extend
         return this
 
     updateFilterModel: ->
-        @model.set search: @$searchInput.val()
-        @model.set type: @typeMenuModel.get("selected")?.value
-        @model.set level: @levelMenuModel.get("selected")?.value
-        @model.set sort: @sortMenuModel.get("selected")?.value
+        @model.set
+            search: @$searchInput.val()
+            type: @typeMenuModel.get("selected")?.value
+            level: @levelMenuModel.get("selected")?.value
+            sort: @sortMenuModel.get("selected")?.value
         Backbone.trigger "action:blueprint:filter"
         return this

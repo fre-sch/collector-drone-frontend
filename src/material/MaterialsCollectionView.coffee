@@ -21,28 +21,24 @@ MaterialView = require './MaterialView'
 
 ### MaterialsCollectionView ###
 module.exports = Backbone.View.extend
-    el: $("#library-materials .collection-items")
-
     initialize: (options) ->
         {@filter, @pager} = options
-        @filter.on "change", => @pager.set offset: 0
+        @pager.listenTo @filter, "change", @pager.reset
+
         new PagerView
-            el: "#library-materials .drone-pagination"
+            el: @$el.parent().find(".drone-pagination")
             model: @pager
 
         @listenTo @model, "reset", @render
-        @listenTo @pager, "change", @render
+        @listenTo @pager, "change:current", @render
         return this
 
     render: ->
-        @$el.empty()
         begin = @pager.offset()
         end = @pager.offset() + @pager.get("limit")
-        @createItemView model, i for model, i in @model.slice begin, end
-        return this
-
-    createItemView: (model, i) ->
-        view = new MaterialView(model: model)
-        el = view.render().el
-        @$el.append el
+        fragment = document.createDocumentFragment()
+        for model, i in @model.slice begin, end
+            view = new MaterialView(model: model)
+            fragment.appendChild(view.render().el)
+        @$el.empty().append(fragment)
         return this

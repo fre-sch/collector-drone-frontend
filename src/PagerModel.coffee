@@ -26,7 +26,11 @@ module.exports = Backbone.Model.extend
         collection: null
 
     initialize: ->
+        @set {current: 1, pages: @calcPages()}, {silent:true}
         @listenTo @get("collection"), "reset", @updatePages
+
+    reset: ->
+        @set {current: 1}, {silent: true}
 
     updatePages: ->
         @set

@@ -23,13 +23,21 @@ module.exports = (source, filterModel) ->
     filtered._source = source
     # allow this object to have it's own events
     filtered._callbacks = {}
+    filtered._foobar = "filter"
 
-    source.on "reset", ()->
+    filtered.resetSource = (data)->
+        filtered._source.reset(data, silent:true)
         filtered.reset source.filter(filterModel.where())
 
-    filterModel.on "change", ()->
+    filtered.refresh = ()->
         items = source.filter filterModel.where()
         filtered.comparator = filterModel.sort?()
         filtered.reset items
+
+    filtered.listenTo source, "reset", ()->
+        filtered.reset source.filter(filterModel.where())
+
+    filtered.listenTo filterModel, "change", ()->
+        filtered.refresh()
 
     filtered

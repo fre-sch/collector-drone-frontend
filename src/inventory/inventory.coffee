@@ -19,4 +19,14 @@ InventoryCollection = require './InventoryCollection'
 
 
 ### inventory Singleton ###
-module.exports = new InventoryCollection()
+module.exports =
+    collection: new InventoryCollection()
+
+    load: ()->
+        @collection.fetch(reset: true, silent: true)
+
+    getItem: (materialId)->
+        @collection.getOrCreate(materialId)
+
+    get: (materialId)->
+        @getItem(materialId).get "quantity"

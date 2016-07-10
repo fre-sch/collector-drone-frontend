@@ -40,7 +40,7 @@ module.exports = Backbone.View.extend
 
     initialize: (options) ->
         for ingredient in @model.blueprint.get("ingredients")
-            inventoryItem = inventory.getOrCreate(ingredient.material.id)
+            inventoryItem = inventory.getItem ingredient.material.id
             @listenTo inventoryItem, "change", @update
         @listenTo @model.trackBlueprint, 'change', @update
         @listenTo @model.trackBlueprint, 'destroy', @remove
@@ -51,11 +51,12 @@ module.exports = Backbone.View.extend
             @model.trackBlueprint.toJSON(),
             @model.blueprint.toJSON()
         )
+        data.completion = @completion()
         $html = $(@template(data))
         for ingredient in data.ingredients
             quantity = ingredient.quantity * @model.trackBlueprint.get("quantity")
-            inventoryQuantity = inventory.get(ingredient.material.id).get("quantity")
-            textClass = "text-danger" if quantity > inventoryQuantity
+            inventoryQuantity = inventory.get ingredient.material.id
+            textClass = if quantity > inventoryQuantity then "text-danger" else ""
             itemView = @itemTpl
                 itemClass: "ingredient-#{ingredient.material.id} #{textClass}"
                 title: ingredient.material.title
@@ -63,17 +64,18 @@ module.exports = Backbone.View.extend
                 inventory: inventoryQuantity
 
             $html.find(".ingredients").append(itemView)
-            
+
         @$el.html $html
         return this
 
     update: ->
         trackedQuantity = @model.trackBlueprint.get "quantity"
         @$el.find("span.blueprint-quantity").html trackedQuantity
+        @$el.find(".drone-blueprint-completion").css(width: @completion() + "%")
 
         for ingredient in @model.blueprint.get "ingredients"
             quantity = ingredient.quantity * trackedQuantity
-            inventoryQuantity = inventory.get(ingredient.material.id).get("quantity")
+            inventoryQuantity = inventory.get ingredient.material.id
 
             if quantity > inventoryQuantity
                 @$el.find(".ingredient-#{ingredient.material.id}"
@@ -89,16 +91,14 @@ module.exports = Backbone.View.extend
 
         return this
 
-    progress: ()->
+    completion: ()->
         trackedQuantity = @model.trackBlueprint.get "quantity"
         total = 0
         complete = 0
         for ingredient in @model.blueprint.get "ingredients"
             required = ingredient.quantity * trackedQuantity
             total += required
-            complete += Math.min(
-                required,
-                inventory.get(ingredient.material.id).get "quantity")
+            complete += Math.min(required, inventory.get ingredient.material.id)
         parseInt Math.min(100, (complete / total) * 100)
 
     track: (event)->
@@ -115,7 +115,7 @@ module.exports = Backbone.View.extend
         @model.trackBlueprint.quantityPlus -1
 
         for ingredient in @model.blueprint.get("ingredients")
-            inventoryItem = inventory.get(ingredient.material.id)
+            inventoryItem = inventory.getItem ingredient.material.id
             amount = Math.min(ingredient.quantity, inventoryItem.get("quantity"))
             inventoryItem.quantityPlus(-amount)
             tracking.untrackMaterial(ingredient.material, ingredient.quantity)
