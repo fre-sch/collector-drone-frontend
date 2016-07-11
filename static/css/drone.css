@@ -280,8 +280,10 @@ section.active {
 }
 .dropdown-menu {
     max-height: 300px;
+    max-height: 70vh;
     overflow: auto;
 }
+
 @media only screen and (min-height: 600px) {
     .dropdown-menu {
         max-height: 450px;
@@ -300,3 +302,4 @@ section.active {
         overflow: none;
     }
 }
+
