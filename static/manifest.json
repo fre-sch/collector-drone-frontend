@@ -4,7 +4,7 @@
     "background_color": "rgb(22,22,22)",
     "description": "Track blueprints and material for Elite: Dangerous",
     "lang": "en-US",
-    ​​"orientation": "portrait-primary",
+    "orientation": "portrait-primary",
     "scope": "/",
     "theme_color": "rgb(226, 106, 10)",
     "icons": [{
