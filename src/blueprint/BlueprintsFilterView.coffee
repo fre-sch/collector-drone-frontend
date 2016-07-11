@@ -33,6 +33,7 @@ module.exports = Backbone.View.extend
         new MenuView
             el: @$el.find(".blueprints-filter-type")
             model: @typeMenuModel
+            asColumns: true
         new MenuView
             el: @$el.find(".blueprints-filter-level")
             model: @levelMenuModel

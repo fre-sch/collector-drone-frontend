@@ -278,6 +278,15 @@ section.active {
     height: 3px;
     width: 0%;
 }
+.dropdown-menu.as-columns {
+    max-width: 90vw;
+    width: 20em;
+}
+.dropdown-menu.as-columns> li {
+    float: left;
+    width: 50%;
+}
+/*
 .dropdown-menu {
     max-height: 300px;
     max-height: 70vh;
@@ -302,4 +311,4 @@ section.active {
         overflow: none;
     }
 }
-
+*/

@@ -25,16 +25,19 @@ module.exports = Backbone.View.extend
     events:
         "click .dropdown-menu li a": "itemClicked"
 
-    initialize: ->
+    initialize: (options)->
+        {@asColumns} = options
         @$button = @$el.find(".btn-group .btn-label")
         @$menu = @$el.find(".btn-group .dropdown-menu")
-        @listenTo @model, "change:items", @updateMenuItems
+        @listenTo @model, "change:items", @render
         @listenTo @model, "change:selected", @updateButton
 
-    updateMenuItems: ->
-        @$menu.find(".divider").nextAll().remove()
+    render: ->
+        fragment = $(document.createDocumentFragment())
         for item in @model.get "items"
-            @$menu.append @itemTemplate(item)
+            fragment.append @itemTemplate(item)
+        @$menu.find(".divider").nextAll().remove()
+        @$menu.append fragment
         @delegateEvents()
 
     updateButton: ->
