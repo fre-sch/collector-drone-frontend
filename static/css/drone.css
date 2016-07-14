@@ -74,7 +74,7 @@
     background: rgb(229, 162, 13) url(icons/material-standard.png) no-repeat;
 }
 
-.blueprint .panel-title {
+.panel-title .title {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -301,7 +301,7 @@ section.active {
     -webkit-box-flex: 0;      /* OLD - iOS 6-, Safari 3.1-6 */
     -webkit-flex: 0 0 auto;   /* Chrome */
     -ms-flex: 0 0;            /* IE 10 */
-    flex: 0 0 auto;           /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    flex: 0 1 auto;           /* NEW, Spec - Opera 12.1, Firefox 20+ */
 }
 .box-items-centered {
     -webkit-flex-align: center;
@@ -319,4 +319,19 @@ section.active {
     font-size: 1.1em;
     font-weight: bold;
     margin: 0 1em;
+}
+.engineers table,
+.ingredients table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+.engineers table td:first-child,
+.ingredients table td:first-child {
+    width: 100%;
+}
+.engineers table td:last-child,
+.ingredients table td:last-child {
+    white-space: nowrap;
+    text-align: right;
 }

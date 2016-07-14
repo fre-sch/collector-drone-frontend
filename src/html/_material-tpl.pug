@@ -1,13 +1,12 @@
 script#material-tpl(type="text/template")
   .panel.panel-default
-    .panel-heading
-      .panel-title.box.box-items-centered
-        span.box-shrink.material-icon(title!="<%=rarity%>")
-        span.box-expand.title(title!="<%=title%>") <%=title%>
-        span.box-shrink.badge(title!="<%=type%>") <%=type%>
+    .panel-heading.box.box-items-centered
+      span.box-shrink.material-icon(title!="<%=rarity%>")
+      span.box-expand.panel-title(title!="<%=title%>") <%=title%>
+      span.box-shrink.badge(title!="<%=type%>") <%=type%>
     .panel-body.toggle.box.box-items-centered
       span.title.box-expand Locations
-      span.icon.box-shrink: +icon("triangle-bottom")
+      span.icon.box-shrink: +icon("triangle-top")
     .panel-body.
       <%
       var titles = locations.map(function(it){return it.title});

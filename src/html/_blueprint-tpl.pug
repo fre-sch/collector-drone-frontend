@@ -1,27 +1,29 @@
 script#blueprint-tpl(type="text/template")
   .panel.panel-default
-    .panel-heading
-      .panel-title.box.box-items-centered
-        span.box-expand.title <%=title%>
-        span.box-shrink.badge <%=level%>
-        span.box-shrink.badge <%=type%>
+    .panel-heading.box.box-items-centered
+      span.box-expand.panel-title <%=title%>
+      span.box-shrink.badge <%=level%>
+      span.box-shrink.badge <%=type%>
     .drone-blueprint-completion(style!="width:<%=completion%>%")
-    .panel-body.toggle.box.box-items-centered
+    .panel-body.toggle.active.box.box-items-centered
       span.box-expand.title Materials
-      span.box-shrink: +icon("triangle-bottom")
-    .panel-body(style="white-space:nowrap")
-      <% for (var i=0; i < ingredients.length; ++i) { %>
-      .row(style="font-size:0.9em")
-        .col-xs-8 <%= ingredients[i].material.title %>
-        .col-xs-4.text-right.
-          <%= ingredients[i].inventory ?  ingredients[i].inventory+" / " : "" %>
-          <%= ingredients[i].quantity %>
-      <% } %>
+      span.box-shrink
+        +icon("triangle-top")
+    .panel-body.ingredients
+      table
+        <% for (var i=0; i < ingredients.length; ++i) { %>
+        tr: td: <%= ingredients[i].material.title %>
+          td: <%= ingredients[i].inventory ?  ingredients[i].inventory+" / " : "" %> <%= ingredients[i].quantity %>
+        <% } %>
     .panel-body.toggle.box.box-items-centered
       span.box-expand.title Engineers
       span.box-shrink: +icon("triangle-bottom")
-    .panel-body
-      .engineers Engineers
+    .panel-body.engineers(style="display:none")
+      table
+        <% for (var i=0; i < engineers.length; ++i) { %>
+        tr: td: <%= engineers[i].name %>
+          td: <%= engineers[i].location %>
+        <% } %>
     .panel-footer
       .btn-group.btn-group-justified
         a.btn.btn-default.track(href="#")

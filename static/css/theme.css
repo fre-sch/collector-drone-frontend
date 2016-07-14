@@ -153,9 +153,11 @@ optgroup {
 table {
     border-collapse: collapse;
     border-spacing: 0;
+    font-size: inherit;
 }
 td, th {
     padding: 0;
+    font-size: inherit;
 }
 a {
     color: #0a8bd6;
@@ -3327,12 +3329,12 @@ a.label:hover, a.label:focus {
     background-color: #cc0000;
 }
 .badge {
-    padding: .2em .4em;
-    font-size: 0.8em;
+    padding: .3em .5em;
+    font-size: 0.9em;
     font-weight: normal;
     color: rgb(255,113,0);
     background-color: rgb(83, 46, 18);
-    border-radius: 1em;
+    border-radius: 0.65em;
     text-transform: uppercase;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -3780,7 +3782,7 @@ a.list-group-item-danger.active, button.list-group-item-danger.active, a.list-gr
 .panel-body {
     padding: 4px;
     color: rgb(255,113,0);
-    border-top: 1px solid rgb(255,113,0);
+    border-top: 1px solid rgb(83, 46, 18);
 }
 .panel-heading {
     padding: 4px 4px 2px 4px;
@@ -3792,10 +3794,7 @@ a.list-group-item-danger.active, button.list-group-item-danger.active, a.list-gr
     color: inherit;
 }
 .panel-title {
-    margin-top: 0;
-    margin-bottom: 0;
     font-size: 1.3em;
-    color: inherit;
 }
 .panel-title> a, .panel-title> small, .panel-title> .small, .panel-title> small> a, .panel-title> .small> a {
     color: inherit;
@@ -3803,7 +3802,7 @@ a.list-group-item-danger.active, button.list-group-item-danger.active, a.list-gr
 .panel-footer {
     padding: 4px;
     background-color: transparent;
-    border: none;
+    border-top: 1px solid rgb(83, 46, 18);;
 }
 .panel> .list-group, .panel> .panel-collapse> .list-group {
     margin-bottom: 0;
@@ -4926,9 +4925,6 @@ body {
     box-shadow: none;
 }
 .dropdown-header {
-    font-size: 16px;
-}
-table, .table {
     font-size: 16px;
 }
 table a, .table a {
