@@ -79,9 +79,7 @@ module.exports = Backbone.View.extend
     addTrackBlueprint: (trackBlueprint) ->
         createViewAndAppend = _.bind((trackBlueprint, blueprint) ->
             view = new TrackBlueprintView
-                model:
-                    trackBlueprint: trackBlueprint
-                    blueprint: blueprint
+                model: {trackBlueprint, blueprint}
             $("#introduction").hide()
             @$trackBlueprints.append view.render().el
             return this

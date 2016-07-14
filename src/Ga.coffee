@@ -82,6 +82,7 @@ module.exports = class Ga
         window.ga "send", "screenview", screenName: view
 
     sendMigrateEvent: (prev, next)->
+        window.ga "send", "screenview", screenName: main
         window.ga "send", "event",
             eventCategory: "migrate"
             eventAction: "update"

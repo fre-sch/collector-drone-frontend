@@ -1,0 +1,34 @@
+script#track-blueprint-tpl(type="text/template")
+  .panel.panel-default
+    .panel-heading
+      .panel-title.box.box-items-centered
+        span.box-expand.title <%=title%>
+        span.box-shrink.badge <%=level%>
+        span.box-shrink.badge <%=type%>
+    .drone-blueprint-completion(style!="width:<%=completion%>%")
+    .panel-body.toggle.box
+      span.box-expand.title Materials
+      span.box-shrink: +icon("triangle-bottom")
+    .panel-body
+      .ingredients
+    .panel-body.toggle.box
+      span.box-expand.title Engineers
+      span.box-shrink: +icon("triangle-bottom")
+    .panel-body
+      .engineers Engineers
+    .panel-footer.box
+      span.box-expand.title Track
+        span.quantity <%=quantity%>
+      span.box-shrink
+        a.btn.btn-default.untrack
+          +icon("minus")
+        a.btn.btn-default.track
+          +icon("plus")
+    .panel-footer
+      .btn-group.btn-group-justified
+        a.btn.btn-default.craft
+          +icon("ok")
+          |  Craft
+        a.btn.btn-default.remove
+          +icon("remove")
+          |  Stop tracking

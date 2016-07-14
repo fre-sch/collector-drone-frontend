@@ -70,7 +70,7 @@ module.exports = Backbone.View.extend
 
     update: ->
         trackedQuantity = @model.trackBlueprint.get "quantity"
-        @$el.find("span.blueprint-quantity").html trackedQuantity
+        @$el.find("span.quantity").html trackedQuantity
         @$el.find(".drone-blueprint-completion").css(width: @completion() + "%")
 
         for ingredient in @model.blueprint.get "ingredients"

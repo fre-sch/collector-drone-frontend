@@ -15,9 +15,15 @@ module.exports = function(grunt) {
         ext: '.js'
       }
     },
-    shell: {
-        compile_index: {
-            command: "./env/bin/python src/util/render.py src/html index.html build/dist/index.html"
+    pug: {
+        compile: {
+            options: {
+                debug: true,
+                pretty: true
+            },
+            files: {
+                'build/dist/index.html': ['src/html/index.pug']
+            }
         }
     },
     browserify: {
@@ -66,11 +72,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-pug');
 
   grunt.registerTask('default', [
       'coffee:compile',
       'browserify:dist',
-      "shell:compile_index",
+      "pug:compile",
       "copy:dist"
   ]);
 

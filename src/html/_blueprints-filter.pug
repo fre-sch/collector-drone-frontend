@@ -1,0 +1,10 @@
+#library-blueprints-filter.tab-pane.active.row
+  .col-xs-4.col-md-3.blueprints-filter-type
+    +dropdown("All types", {id:"menu-filter-2"}, {class:["as-columns","clearfix"]})
+  .col-xs-4.col-md-2.blueprints-filter-level
+    +dropdown("All levels", {id:"menu-filter-3"})
+  .col-md-2.col-md-push-5.col-xs-4.text-right.blueprints-sort
+    +dropdown("Unsorted", {id:"sort-by-2"})
+  .col-md-5.col-md-pull-2.col-xs-12
+    input.form-control.blueprints-filter-search(
+        type="text",placeholder="Search...")

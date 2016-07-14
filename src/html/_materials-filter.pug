@@ -1,0 +1,8 @@
+#library-materials-filter.tab-pane.row
+  .col-md-3.col-xs-6.materials-filter-type
+    +dropdown("All types", {id:"menu-filter-3"})
+  .col-md-2.col-md-push-7.col-xs-6.text-right.materials-sort
+    +dropdown("Unsorted", {id:"sort-by-3"})
+  .col-md-7.col-md-pull-2.col-xs-12
+    input.form-control.materials-filter-search(
+        type="text", placeholder="Search...")

@@ -1,0 +1,14 @@
+mixin dropdown(initialText, attrButton, attrMenu)
+  .btn-group(style="width:100%")
+    button.btn.btn-default.dropdown-toggle(
+        type="button",
+        data-toggle="dropdown",
+        style="width:100%;text-align:left")&attributes(attrButton)
+      span.btn-label(data-value="") #{initialText}
+      span.caret-right: span.caret
+    ul.dropdown-menu&attributes(attrMenu)
+      li: a(href="#",data-value="") #{initialText}
+      li.divider(style="width:100%",role="separator")
+
+mixin icon(name)
+  span.glyphicon&attributes({class:"glyphicon-"+name})
