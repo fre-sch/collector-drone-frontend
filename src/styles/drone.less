@@ -1,13 +1,60 @@
 @import "variables.less";
+@import "theme.less";
 
-.panel-body.toggle {
-    border-color: @my-primary;
-    color: @my-primary;
+
+.material {
+    .panel-heading,
+    .panel-body.toggle {
+        color: @my-primary;
+    }
+    .panel-body, .panel-footer {
+        border-color: @my-primary;
+        color: @my-primary-fg;
+    }
 }
+.track-blueprint,
+.blueprint {
+    .panel-body,
+    .panel-footer {
+        border-color: @my-secondary-muted;
+        color: @my-secondary-fg;
+    }
+    .panel-heading,
+    .panel-body.toggle {
+        color: @my-secondary;
+    }
+    .btn-primary {
+        color: @my-secondary;
+        background-color: @my-secondary-muted;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active {
+        color: @my-component;
+        background-color: @my-secondary;
+    }
+    .btn-default {
+        color: @my-secondary-fg;
+    }
+    .btn-default:hover,
+    .btn-default:focus,
+    .btn-default:active {
+        color: @my-secondary;
+        background-color: @my-secondary-muted;
+    }
+    .badge, .panel-heading .badge {
+        color: @my-secondary;
+        background-color: @my-secondary-muted;
+    }
+    .drone-flash-text {
+        color: @my-secondary;
+    }
+}
+
 .rarity-very-rare,
 .rarity-rare {
     .panel-heading,
-    .panel-body,
+    .panel-body, .panel-body.toggle,
     .panel-footer {
         color: @my-rarity-rare-fg;
         border-color: @my-rarity-rare-muted;
@@ -31,7 +78,7 @@
 }
 .rarity-standard {
     .panel-heading,
-    .panel-body,
+    .panel-body, .panel-body.toggle,
     .panel-footer {
         color: @my-rarity-standard-fg;
         border-color: @my-rarity-standard-muted;
@@ -52,41 +99,28 @@
         background-color: @my-rarity-standard;
     }
 }
-
 .material-icon {
     display: inline-block;
     width: 20px;
     height: 20px;
     margin-right: 0.3em;
 }
-
 .rarity-very-rare .material-icon {
     background: rgb(218, 218, 218) url(icons/material-very-rare.png) no-repeat;
 }
-
 .rarity-rare .material-icon {
     background: rgb(218, 218, 218) url(icons/material-rare.png) no-repeat;
 }
-
 .rarity-common .material-icon {
     background: rgb(226, 106, 10) url(icons/material-common.png) no-repeat;
 }
-
 .rarity-very-common .material-icon {
     background: rgb(226, 106, 10) url(icons/material-very-common.png) no-repeat;
 }
-
 .rarity-standard .material-icon {
     background: rgb(229, 162, 13) url(icons/material-standard.png) no-repeat;
 }
-
 .panel-title .title {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.material-title {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -96,19 +130,19 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-
-.track-material .location,
-.material .location {
-    display: inline-block;
-    padding: .2em .6em .3em;
-    margin: .4em .4em .4em 0;
-    font-weight: normal;
-    line-height: 1;
-    text-align: center;
-    vertical-align: baseline;
-    border-radius: 1em;
-    background: @my-primary-muted;
-    color: @my-primary;
+.track-material, .material {
+    .location {
+        display: inline-block;
+        padding: .2em .6em .3em;
+        margin: .4em .4em .4em 0;
+        font-weight: normal;
+        line-height: 1;
+        text-align: center;
+        vertical-align: baseline;
+        border-radius: 1em;
+        background: @my-primary-muted;
+        color: @my-primary;
+    }
 }
 
 @media (max-width: 767px) {
@@ -267,15 +301,11 @@ section.active {
     height: 100%;
     background: rgba(0,0,0,0.7);
     z-index: 1000;
-}
-.drone-flash-text {
-    position: absolute;
-    width: 100%;
-    top: 40%;
-    text-align: center;
+    font-size: 1.1em;
+    font-weight: bold;
 }
 .drone-blueprint-completion {
-    background: @my-primary;
+    background: @my-secondary;
     height: 3px;
     width: 0%;
 }
@@ -293,18 +323,18 @@ section.active {
     display: -ms-flexbox;      /* TWEENER - IE 10 */
     display: -webkit-flex;     /* NEW - Chrome */
     display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
-}
-.box .box-expand {
-    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
-    -webkit-flex: 1 0 auto;   /* Chrome */
-    -ms-flex: 1 0;            /* IE 10 */
-    flex: 1 0 auto;           /* NEW, Spec - Opera 12.1, Firefox 20+ */
-}
-.box .box-shrink {
-    -webkit-box-flex: 0;      /* OLD - iOS 6-, Safari 3.1-6 */
-    -webkit-flex: 0 0 auto;   /* Chrome */
-    -ms-flex: 0 0;            /* IE 10 */
-    flex: 0 1 auto;           /* NEW, Spec - Opera 12.1, Firefox 20+ */
+     .box-expand {
+        -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+        -webkit-flex: 1 0 auto;   /* Chrome */
+        -ms-flex: 1 0;            /* IE 10 */
+        flex: 1 0 auto;           /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    }
+    .box-shrink {
+        -webkit-box-flex: 0;      /* OLD - iOS 6-, Safari 3.1-6 */
+        -webkit-flex: 0 0 auto;   /* Chrome */
+        -ms-flex: 0 0;            /* IE 10 */
+        flex: 0 1 auto;           /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    }
 }
 .box-items-centered {
     -webkit-flex-align: center;
@@ -312,29 +342,32 @@ section.active {
     flex-align: center;
     align-items: center;
 }
-.panel-footer .title {
-    font-size: 1.1em;
-    margin: 0 1em;
-    text-transform: uppercase;
+.panel-footer {
+    .title {
+        font-size: 1.1em;
+        margin: 0 1em;
+        text-transform: uppercase;
+    }
+    .quantity,
+    .inventory {
+        font-size: 1.1em;
+        font-weight: bold;
+        margin: 0 1em;
+    }
 }
-.panel-footer .quantity,
-.panel-footer .inventory {
-    font-size: 1.1em;
-    font-weight: bold;
-    margin: 0 1em;
-}
-.engineers table,
-.ingredients table {
-    width: 100%;
-    border-spacing: 0;
-    border-collapse: collapse;
-}
-.engineers table td:first-child,
-.ingredients table td:first-child {
-    width: 100%;
-}
-.engineers table td:last-child,
-.ingredients table td:last-child {
-    white-space: nowrap;
-    text-align: right;
+.engineers, .ingredients {
+    table {
+        width: 100%;
+        border-spacing: 0;
+        border-collapse: collapse;
+    }
+    table td:first-child,
+    table td:first-child {
+        width: 100%;
+    }
+    table td:last-child,
+    table td:last-child {
+        white-space: nowrap;
+        text-align: right;
+    }
 }

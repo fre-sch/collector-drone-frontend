@@ -1757,6 +1757,7 @@ textarea.input-lg, select[multiple].input-lg {
     font-size: 1.1em;
     border-radius: 0;
     overflow: hidden;
+    margin: 0 1px;
 }
 .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus {
     outline: thin dotted;
@@ -1822,34 +1823,34 @@ a.btn.disabled, fieldset[disabled] a.btn {
 .btn-primary {
     color: @my-primary;
     background-color: rgb(83, 46, 18);
-    border-color: transparent;
+    border: none;
 }
 .btn-primary:focus, .btn-primary.focus {
     color: @my-primary;
     background-color: rgb(83, 46, 18);
-    border-color: rgba(0, 0, 0, 0);
+    border: none;
 }
 .btn-primary:hover {
     color: rgb(22,22,22);
     background-color: @my-primary;
-    border-color: transparent;
+    border: none;
 }
 .btn-primary:active, .btn-primary.active, .open> .dropdown-toggle.btn-primary {
     color: rgb(83, 46, 18);
     background-color: #cc5a00;
-    border-color: rgba(0, 0, 0, 0);
+    border: none;
 }
 .btn-primary:active:hover, .btn-primary.active:hover, .open> .dropdown-toggle.btn-primary:hover, .btn-primary:active:focus, .btn-primary.active:focus, .open> .dropdown-toggle.btn-primary:focus, .btn-primary:active.focus, .btn-primary.active.focus, .open> .dropdown-toggle.btn-primary.focus {
     color: rgb(22,22,22);
     background-color: @my-primary;
-    border-color: rgba(0, 0, 0, 0);
+    border: none;
 }
 .btn-primary:active, .btn-primary.active, .open> .dropdown-toggle.btn-primary {
     background-image: none;
 }
 .btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover, .btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus, .btn-primary.disabled.focus, .btn-primary[disabled].focus, fieldset[disabled] .btn-primary.focus {
     background-color: @my-primary;
-    border-color: transparent;
+    border: none;
 }
 .btn-primary .badge {
     color: @my-primary;
@@ -3767,7 +3768,7 @@ a.list-group-item-danger.active, button.list-group-item-danger.active, a.list-gr
 .panel-body {
     padding: 0.3em 0.6em;
     color: rgb(179, 79, 0);
-    border-top: 1px solid rgb(83, 46, 18);
+    border-top: 1px solid @my-primary-muted;
 }
 .panel-heading {
     padding: 4px 4px 2px 4px;
