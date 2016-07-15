@@ -28,8 +28,7 @@ module.exports = function(grunt) {
                 sourceMap: true
             },
             files: {
-                'build/dist/css/drone.css': 'src/styles/drone.less',
-                'build/dist/css/theme.css': 'src/styles/theme.less'
+                'build/dist/css/drone.css': 'src/styles/drone.less'
             }
         }
     },
