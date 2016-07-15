@@ -27,7 +27,8 @@ module.exports = Backbone.View.extend
     events:
         "click .panel-body.toggle": "toggleNextBody"
         "click .btn.track": "track"
-        "click .btn.remove": "untrack"
+        "click .btn.untrack": "untrack"
+        "click .btn.remove": "remove"
         "click .btn.craft": "craft"
 
     itemTpl: _.template("""
@@ -108,6 +109,11 @@ module.exports = Backbone.View.extend
         return this
 
     untrack: (event)->
+        tracking.untrackBlueprint(@model.blueprint)
+        event?.preventDefault()
+        return this
+
+    remove: (event)->
         tracking.untrackBlueprint(@model.blueprint)
         event?.preventDefault()
         return this
