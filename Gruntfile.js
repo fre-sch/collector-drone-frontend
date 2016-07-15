@@ -17,12 +17,19 @@ module.exports = function(grunt) {
     },
     pug: {
         compile: {
-            options: {
-                debug: true,
-                pretty: true
-            },
             files: {
                 'build/dist/index.html': ['src/html/index.pug']
+            }
+        }
+    },
+    less: {
+        compile: {
+            options: {
+                sourceMap: true
+            },
+            files: {
+                'build/dist/css/drone.css': 'src/styles/drone.less',
+                'build/dist/css/theme.css': 'src/styles/theme.less'
             }
         }
     },
@@ -73,11 +80,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-pug');
+  grunt.loadNpmTasks('grunt-contrib-less');
 
   grunt.registerTask('default', [
       'coffee:compile',
       'browserify:dist',
       "pug:compile",
+      "less:compile",
       "copy:dist"
   ]);
 

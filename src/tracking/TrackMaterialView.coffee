@@ -24,6 +24,7 @@ module.exports = Backbone.View.extend
     className: "col-sm-6 material"
 
     events:
+        "click .panel-body.toggle": "toggleNextBody"
         "click .inventory-plus": "inventoryPlus"
         "click .inventory-minus": "inventoryMinus"
         "click .btn.remove": "removeTrack"
@@ -51,13 +52,15 @@ module.exports = Backbone.View.extend
         @$el.find("span.quantity").html @model.get("quantity")
 
     inventoryPlus: (event)->
-        @inventory.quantityPlus 1
+        quantity = if event.shiftKey then 5 else 1
+        @inventory.quantityPlus quantity
         Backbone.trigger("action:inventory:plus")
         event.preventDefault()
         this
 
     inventoryMinus: (event)->
-        @inventory.quantityPlus -1
+        quantity = if event.shiftKey then 5 else 1
+        @inventory.quantityPlus -quantity
         Backbone.trigger("action:inventory:minus")
         event.preventDefault()
         this
@@ -73,4 +76,11 @@ module.exports = Backbone.View.extend
         @model.quantityPlus 1
         Backbone.trigger("action:material:track")
         event.preventDefault()
+        this
+
+    toggleNextBody: (e)->
+        $(e.currentTarget).next().slideToggle(80)
+        $(e.currentTarget).find(".glyphicon")
+            .toggleClass("glyphicon-triangle-bottom")
+            .toggleClass("glyphicon-triangle-top")
         this

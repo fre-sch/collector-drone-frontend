@@ -25,18 +25,19 @@ module.exports = Backbone.View.extend
     className: "col-sm-6 track-blueprint"
 
     events:
+        "click .panel-body.toggle": "toggleNextBody"
         "click .btn.track": "track"
         "click .btn.remove": "untrack"
         "click .btn.craft": "craft"
 
     itemTpl: _.template("""
-        <div class="row <%=itemClass%>" style="font-size: 0.9em">
-          <div class="col-xs-10"><%= title %></div>
-          <div class="col-xs-2 text-right">
+        <tr class="<%=itemClass%>">
+          <td><%= title %></td>
+          <td>
             <span class="inventory"><%= inventory %></span>
             / <small class="quantity"><%= quantity %></small>
-          </div>
-        </div>""")
+          </td>
+        </tr>""")
 
     initialize: (options) ->
         for ingredient in @model.blueprint.get("ingredients")
@@ -63,7 +64,7 @@ module.exports = Backbone.View.extend
                 quantity: quantity
                 inventory: inventoryQuantity
 
-            $html.find(".ingredients").append(itemView)
+            $html.find(".ingredients table").append(itemView)
 
         @$el.html $html
         return this
@@ -126,3 +127,10 @@ module.exports = Backbone.View.extend
         Backbone.trigger "action:blueprint:craft"
         event?.preventDefault()
         return this
+
+    toggleNextBody: (e)->
+        $(e.currentTarget).next().slideToggle(80)
+        $(e.currentTarget).find(".glyphicon")
+            .toggleClass("glyphicon-triangle-bottom")
+            .toggleClass("glyphicon-triangle-top")
+        this
