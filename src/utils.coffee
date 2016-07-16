@@ -22,8 +22,10 @@
 strcmp = (a, b) ->
     a.localeCompare(b)
 
+
 numcmp = (a, b) ->
     if a > b then 1 else -1
+
 
 cmp = (a, b) ->
     if not a
@@ -36,4 +38,17 @@ cmp = (a, b) ->
         numcmp(a, b)
 
 
-module.exports = {strcmp, numcmp, cmp}
+dateFormatted = ()->
+    now = new Date()
+    y = now.getUTCFullYear()
+    m = now.getUTCMonth() + 1
+    m = "0#{m}".slice -2
+    d = now.getUTCDate()
+    d = "0#{d}".slice -2
+    s = now.getUTCHours() * 60 * 60
+    s += now.getUTCMinutes() * 60
+    s += now.getUTCSeconds()
+    "#{y}-#{m}-#{d}.#{s}"
+
+
+module.exports = {strcmp, numcmp, cmp, dateFormatted}

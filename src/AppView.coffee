@@ -15,7 +15,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+utils = require './utils'
 inventory = require './inventory'
 tracking = require "./tracking"
 TrackBlueprintView = require './TrackBlueprintView'
@@ -26,7 +26,10 @@ TrackingTabView = require './TrackingTabView'
 ### AppView ###
 module.exports = Backbone.View.extend
     el: 'body'
-    events: {}
+
+    events:
+        "click #export": "exportData"
+
     initialize: (options) ->
         {@blueprints, @materials} = options
         @$trackMaterials = $("#tracker-materials")
@@ -89,3 +92,18 @@ module.exports = Backbone.View.extend
             success: createViewAndAppend
 
         return this
+
+    exportData: ()->
+        ids = localStorage.getItem("InvMaterial") or ""
+        ids = ids.split ","
+        data = {}
+        for id in ids
+            key = "InvMaterial-#{id}"
+            item = JSON.parse(localStorage.getItem key)
+            if item.quantity > 0
+                data[key] = item
+
+        dataText = JSON.stringify(data)
+        timestamp = utils.dateFormatted()
+        fileName = "collector-drone.#{timestamp}.txt"
+        saveTextAs(dataText, fileName)
