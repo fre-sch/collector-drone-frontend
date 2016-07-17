@@ -1,0 +1,33 @@
+section#library
+  .section-head.section-head-2
+    .container
+      nav#resource-filter-tabs
+        ul.nav.nav-pills.nav-justified
+          li#view-library-blueprints.active
+            a(href="#/library/blueprints") Blueprints (#[span.num-blueprints 0])
+          li#view-library-materials
+            a(href="#/library/materials") Materials (#[span.num-materials 0])
+      .tab-content
+        include _blueprints-filter.pug
+        include _materials-filter.pug
+  .tab-content
+    #library-blueprints.tab-pane.container.active
+      .collection-items.row
+      .clearfix.drone-pagination(style="margin-bottom:1em")
+        a.btn.btn-primary.previous.pull-left(href="#")
+          +icon("chevron-left")
+          span.hidden-xs.hidden-sm Previous
+        a.btn.btn-primary.next.pull-right(href="#")
+          span.hidden-xs.hidden-sm Next
+          +icon("chevron-right")
+        .drone-pages
+    #library-materials.tab-pane.container.active
+      .collection-items.row
+      .clearfix.drone-pagination(style="margin-bottom:1em")
+        a.btn.btn-primary.previous.pull-left(href="#")
+          +icon("chevron-left")
+          span.hidden-xs.hidden-sm Previous
+        a.btn.btn-primary.next.pull-right(href="#")
+          span.hidden-xs.hidden-sm Next
+          +icon("chevron-right")
+        .drone-pages

@@ -1,0 +1,25 @@
+script#material-tpl(type="text/template")
+  .panel.panel-default
+    .panel-heading.box.box-items-centered
+      span.box-shrink.material-icon(title!="<%=rarity%>")
+      span.box-expand.panel-title(title!="<%=title%>") <%=title%>
+      span.box-shrink.badge(title!="<%=type%>") <%=type%>
+    .panel-body.toggle.box.box-items-centered
+      span.title.box-expand Locations
+      span.icon.box-shrink: +icon("triangle-top")
+    .panel-body.
+      <%
+      var titles = locations.map(function(it){return it.title});
+      titles.sort(function(a,b){return a.length-b.length});
+      for(var i=0; i<titles.length; ++i) { %>
+          <span class="location"><%=titles[i]%></span>
+      <% } %>
+    .panel-footer.box.box-items-centered
+      span.box-expand.title &nbsp;
+      span.box-expand.title Inventory
+        span.inventory <%= inventory %>
+      span.box-shrink.buttons
+        a.btn.btn-primary.inventory-minus
+          +icon("minus")
+        a.btn.btn-primary.inventory-plus
+          +icon("plus")

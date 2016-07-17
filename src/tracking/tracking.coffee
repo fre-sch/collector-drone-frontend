@@ -42,13 +42,16 @@ class TrackingController
         Backbone.trigger("action:blueprint:track")
         return tracked
 
-    untrackBlueprint: (blueprint) ->
+    untrackBlueprint: (blueprint, quantity=null) ->
         tracked = @blueprints.get(blueprint.id)
         if tracked
+            quantity ?= tracked.get "quantity"
+            tracked.quantityPlus -quantity
             for ingredient in blueprint.get("ingredients")
-                total = ingredient.quantity * tracked.get("quantity")
+                total = ingredient.quantity * quantity
                 @untrackMaterial(ingredient.material, total)
-            tracked.destroy()
+            if tracked.get("quantity") <= 0
+                tracked.destroy()
 
         Backbone.trigger("action:blueprint:untrack")
         return this

@@ -1,0 +1,33 @@
+script#track-blueprint-tpl(type="text/template")
+  .panel.panel-default
+    .panel-heading.box.box-items-centered
+      span.box-expand.panel-title(title!="<%=title%>") <%=title%>
+      span.box-shrink.badge(title!="<%=level%>") <%=level%>
+      span.box-shrink.badge(title!="<%=type%>") <%=type%>
+    .drone-blueprint-completion(style!="width:<%=completion%>%")
+    .panel-body.toggle.box
+      span.box-expand.title Materials
+      span.box-shrink: +icon("triangle-top")
+    .panel-body.ingredients
+      table
+    .panel-body.toggle.box
+      span.box-expand.title Engineers
+      span.box-shrink: +icon("triangle-bottom")
+    .panel-body.engineers(style="display:none")
+      table
+        <% for (var i=0; i < engineers.length; ++i) { %>
+        tr: td: <%= engineers[i].name %>
+          td: <%= engineers[i].location %>
+        <% } %>
+    .panel-footer.box.box-items-centered
+      span.box-expand.title Track
+        span.quantity <%=quantity%>
+      span.box-shrink
+        a.btn.btn-primary.untrack
+          +icon("minus")
+        a.btn.btn-primary.track
+          +icon("plus")
+    .panel-footer
+      .btn-group.btn-group-justified
+        a.btn.btn-default.craft Craft
+        a.btn.btn-default.stop Stop tracking

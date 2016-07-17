@@ -26,6 +26,7 @@ module.exports = Backbone.View.extend
 
     events:
         "click a.track": "track"
+        "click .panel-body.toggle": "toggleNextBody"
 
     initialize: (options) ->
         @listenTo @model, "destroy", @remove
@@ -38,11 +39,12 @@ module.exports = Backbone.View.extend
         @$el.html @template(data)
         return this
 
-    # update: ()->
-    #     completion = @model.completion()
-    #     console.info "update blueprint, completion", completion
-    #     @$el.find(".drone-blueprint-completion").css(width: completion + "%")
-    #     return this
+    toggleNextBody: (e)->
+        $(e.currentTarget).next().slideToggle(80)
+        $(e.currentTarget).find(".glyphicon")
+            .toggleClass("glyphicon-triangle-bottom")
+            .toggleClass("glyphicon-triangle-top")
+        this
 
     track: (event)->
         tracking.trackBlueprint(@model)

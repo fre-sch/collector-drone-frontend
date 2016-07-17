@@ -15,9 +15,21 @@ module.exports = function(grunt) {
         ext: '.js'
       }
     },
-    shell: {
-        compile_index: {
-            command: "./env/bin/python src/util/render.py src/html index.html build/dist/index.html"
+    pug: {
+        compile: {
+            files: {
+                'build/dist/index.html': ['src/html/index.pug']
+            }
+        }
+    },
+    less: {
+        compile: {
+            options: {
+                sourceMap: true
+            },
+            files: {
+                'build/dist/css/drone.css': 'src/styles/drone.less'
+            }
         }
     },
     browserify: {
@@ -66,11 +78,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-pug');
+  grunt.loadNpmTasks('grunt-contrib-less');
 
   grunt.registerTask('default', [
       'coffee:compile',
       'browserify:dist',
-      "shell:compile_index",
+      "pug:compile",
+      "less:compile",
       "copy:dist"
   ]);
 

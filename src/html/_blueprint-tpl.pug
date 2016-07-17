@@ -1,0 +1,31 @@
+script#blueprint-tpl(type="text/template")
+  .panel.panel-default
+    .panel-heading.box.box-items-centered
+      span.box-expand.panel-title(title!="<%=title%>") <%=title%>
+      span.box-shrink.badge(title!="<%=level%>") <%=level%>
+      span.box-shrink.badge(title!="<%=type%>") <%=type%>
+    .drone-blueprint-completion(style!="width:<%=completion%>%")
+    .panel-body.toggle.active.box.box-items-centered
+      span.box-expand.title Materials
+      span.box-shrink
+        +icon("triangle-top")
+    .panel-body.ingredients
+      table
+        <% for (var i=0; i < ingredients.length; ++i) { %>
+        tr: td: <%= ingredients[i].material.title %>
+          td: <%= ingredients[i].inventory ?  ingredients[i].inventory+" / " : "" %> <%= ingredients[i].quantity %>
+        <% } %>
+    .panel-body.toggle.box.box-items-centered
+      span.box-expand.title Engineers
+      span.box-shrink: +icon("triangle-bottom")
+    .panel-body.engineers(style="display:none")
+      table
+        <% for (var i=0; i < engineers.length; ++i) { %>
+        tr: td: <%= engineers[i].name %>
+          td: <%= engineers[i].location %>
+        <% } %>
+    .panel-footer
+      .btn-group.btn-group-justified
+        a.btn.btn-default.track(href="#") Add to Tracker
+    .drone-flash.drone-flash-info.box.box-items-centered(style="display:none")
+      .drone-flash-text.box-expand.text-center Added to Tracker

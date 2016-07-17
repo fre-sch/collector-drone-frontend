@@ -1,0 +1,15 @@
+section#tracker.active
+  .section-head.section-head-1
+    #track-toolbar.container
+      nav
+        ul#track-tab-view.nav.nav-pills.nav-justified
+          li#view-tracker-blueprints.active
+            a(href="#/tracker/blueprints")
+              | Blueprints (#[span.num-blueprints 0])
+          li#view-tracker-materials
+            a(href="#/tracker/materials")
+              | Materials (#[span.num-materials 0])
+  .tab-content.container
+    include _introduction.html
+    #tracker-blueprints.tab-pane.row.active
+    #tracker-materials.tab-pane.row

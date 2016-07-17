@@ -1,0 +1,376 @@
+@import "variables.less";
+@import "theme.less";
+
+
+.material {
+    .panel-heading,
+    .panel-body.toggle {
+        color: @my-primary;
+    }
+    .panel-body, .panel-footer {
+        border-color: @my-primary-muted;
+        color: @my-primary-fg;
+    }
+}
+.track-blueprint,
+.blueprint {
+    .panel-body,
+    .panel-footer {
+        border-color: @my-secondary-muted;
+        color: @my-secondary-fg;
+    }
+    .panel-heading,
+    .panel-body.toggle {
+        color: @my-secondary;
+    }
+    .btn-primary {
+        color: @my-secondary;
+        background-color: @my-secondary-muted;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active {
+        color: @my-component;
+        background-color: @my-secondary;
+    }
+    .btn-default {
+        color: @my-secondary-fg;
+    }
+    .btn-default:hover,
+    .btn-default:focus,
+    .btn-default:active {
+        color: @my-secondary;
+        background-color: @my-secondary-muted;
+    }
+    .badge, .panel-heading .badge {
+        color: @my-secondary;
+        background-color: @my-secondary-muted;
+    }
+    .drone-flash-text {
+        color: @my-secondary;
+    }
+}
+
+.rarity-very-rare,
+.rarity-rare {
+    .panel-heading,
+    .panel-body, .panel-body.toggle,
+    .panel-footer {
+        color: @my-rarity-rare-fg;
+        border-color: @my-rarity-rare-muted;
+    }
+    .panel-heading {
+        color: @my-rarity-rare;
+    }
+    .badge,
+    .panel-heading .badge {
+        color: @my-rarity-rare;
+        background-color: @my-rarity-rare-muted;
+    }
+    .btn {
+        color: @my-rarity-rare;
+        background-color: @my-rarity-rare-muted;
+    }
+    .btn:hover {
+        color: @my-component;
+        background-color: @my-rarity-rare;
+    }
+}
+.rarity-standard {
+    .panel-heading,
+    .panel-body, .panel-body.toggle,
+    .panel-footer {
+        color: @my-rarity-standard-fg;
+        border-color: @my-rarity-standard-muted;
+    }
+    .panel-heading {
+        color: @my-rarity-standard;
+    }
+    .badge, .panel-heading .badge {
+        color: @my-rarity-standard;
+        background-color: @my-rarity-standard-muted;
+    }
+    .btn {
+        color: @my-rarity-standard;
+        background-color: @my-rarity-standard-muted;
+    }
+    .btn:hover {
+        color: @my-component;
+        background-color: @my-rarity-standard;
+    }
+}
+.material-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 0.3em;
+}
+.rarity-very-rare .material-icon {
+    background: rgb(218, 218, 218) url(icons/material-very-rare.png) no-repeat;
+}
+.rarity-rare .material-icon {
+    background: rgb(218, 218, 218) url(icons/material-rare.png) no-repeat;
+}
+.rarity-common .material-icon {
+    background: rgb(226, 106, 10) url(icons/material-common.png) no-repeat;
+}
+.rarity-very-common .material-icon {
+    background: rgb(226, 106, 10) url(icons/material-very-common.png) no-repeat;
+}
+.rarity-standard .material-icon {
+    background: rgb(229, 162, 13) url(icons/material-standard.png) no-repeat;
+}
+.panel-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.track-blueprint .title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.track-material, .material {
+    .location {
+        display: inline-block;
+        padding: .2em .6em .3em;
+        margin: .4em .4em .4em 0;
+        font-weight: normal;
+        line-height: 1;
+        text-align: center;
+        vertical-align: baseline;
+        border-radius: 1em;
+        background: @my-primary-muted;
+        color: @my-primary;
+    }
+}
+
+@media (max-width: 767px) {
+    .track-material .location,
+    .material .location {
+        margin: .2em .4em .2em 0;
+    }
+}
+
+.track-material.rarity-rare .location,
+.track-material.rarity-very-rare .location,
+.material.rarity-rare .location,
+.material.rarity-very-rare .location {
+    color: rgb(218, 218, 218);
+    background-color: rgb(86, 86, 86);
+}
+.track-material.rarity-standard .location,
+.material.rarity-standard .location {
+    color: rgb(229, 162, 13);
+    background-color: rgb(84, 64, 19);
+}
+
+@media (min-width: 768px) {
+    #library-blueprints .collection-items .col-sm-6:nth-child(2n+1),
+    #library-materials .collection-items .col-sm-6:nth-child(2n+1),
+    #tracker-blueprints .col-sm-6:nth-child(2n+1),
+    #tracker-materials .col-sm-6:nth-child(2n+1) {
+        clear: left;
+    }
+}
+#introduction {
+    margin: -1em 0 0 0;
+}
+#introduction .item {
+    min-height: 20em;
+}
+@media (max-width: 767px) {
+    #introduction .item {
+        min-height: 30em;
+    }
+}
+.carousel-caption {
+    position:static;
+    margin: 0 15%;
+    color: inherit;
+    font-size: 1.2em;
+}
+.caret-right .caret {
+    position: absolute;
+    top: 0.8em;
+    right: 0.6em;
+}
+@media (max-width: 767px) {
+    .panel {
+        margin-bottom: 8px;
+    }
+}
+@media (max-width: 767px) {
+    body {
+        font-size: 12px;
+    }
+}
+.drone-pagination a.page {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0.5em 0.2em 0 0.2em;
+    margin-top: 0.5em;
+    text-indent: -9999px;
+    border: 1px solid @my-primary;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #000 \9;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0;
+    overflow: hidden;
+}
+.drone-pagination a.active {
+    margin-top: 0.5em;
+    width: 12px;
+    height: 12px;
+    background-color: @my-primary;
+}
+.drone-pagination .pull-right,
+.drone-pagination .pull-left {
+    display: block;
+}
+.drone-pagination .drone-pages {
+    margin: 0.2em auto 0 auto;
+    display: block;
+    width: 80%;
+    text-align: center;
+}
+@media (min-width: 992px) {
+    .drone-pagination .previous,
+    .drone-pagination .next {
+        width: 8em;
+    }
+}
+body {
+    padding-top: 48px;
+}
+section {
+    display: none;
+}
+section.active {
+    display: block;
+}
+.section-head {
+    position: fixed;
+    background: tint(@my-component, 3%);
+    z-index: 1030;
+    padding: 16px 0 8px 0;
+    width: 100%;
+}
+.section-head-1 {
+    padding-bottom: 0;
+}
+.section-head-1 + .tab-content {
+    padding-top: 54px;
+}
+.section-head-2 + .tab-content {
+    padding-top: 128px;
+}
+.col-xs-12 {
+    margin-top: 8px;
+}
+@media only screen and (min-width: 767px) {
+    /*.section-head { padding-right: 16px }*/
+    .section-head-1 + .tab-content {
+        padding-top: 57px;
+    }
+    .section-head-2 + .tab-content {
+        padding-top: 135px;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .col-xs-12 {
+        margin-top: 0;
+    }
+    .section-head-1 + .tab-content {
+        padding-top: 57px;
+    }
+    .section-head-2 + .tab-content {
+        padding-top: 97px;
+    }
+}
+.panel {
+    position: relative;
+}
+.drone-flash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+.drone-blueprint-completion {
+    background: @my-secondary;
+    height: 3px;
+    width: 0%;
+}
+.dropdown-menu.as-columns {
+    max-width: 90vw;
+    width: 20em;
+}
+.dropdown-menu.as-columns> li {
+    float: left;
+    width: 50%;
+}
+.box {
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+     .box-expand {
+        -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+        -webkit-flex: 1 0 0;   /* Chrome */
+        -ms-flex: 1 0;            /* IE 10 */
+        flex: 1 0 0;           /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    }
+    .box-shrink {
+        -webkit-box-flex: 0;      /* OLD - iOS 6-, Safari 3.1-6 */
+        -webkit-flex: 0 0 auto;   /* Chrome */
+        -ms-flex: 0 0;            /* IE 10 */
+        flex: 0 1 auto;           /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    }
+}
+.box-items-centered {
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    flex-align: center;
+    align-items: center;
+}
+.panel-footer {
+    .title {
+        font-size: 1.1em;
+        margin: 0 1em;
+        text-transform: uppercase;
+    }
+    .quantity,
+    .inventory {
+        font-size: 1.1em;
+        font-weight: bold;
+        margin: 0 1em;
+    }
+}
+.engineers, .ingredients {
+    table {
+        width: 100%;
+        border-spacing: 0;
+        border-collapse: collapse;
+    }
+    table td:first-child,
+    table td:first-child {
+        width: 100%;
+    }
+    table td:last-child,
+    table td:last-child {
+        white-space: nowrap;
+        text-align: right;
+    }
+}
+.materials-filter-type .dropdown-menu> li> a {
+    text-transform: capitalize;
+}
