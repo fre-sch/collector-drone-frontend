@@ -1,9 +1,9 @@
 script#blueprint-tpl(type="text/template")
   .panel.panel-default
     .panel-heading.box.box-items-centered
-      span.box-expand.panel-title <%=title%>
-      span.box-shrink.badge <%=level%>
-      span.box-shrink.badge <%=type%>
+      span.box-expand.panel-title(title!="<%=title%>") <%=title%>
+      span.box-shrink.badge(title!="<%=level%>") <%=level%>
+      span.box-shrink.badge(title!="<%=type%>") <%=type%>
     .drone-blueprint-completion(style!="width:<%=completion%>%")
     .panel-body.toggle.active.box.box-items-centered
       span.box-expand.title Materials

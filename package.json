@@ -1,7 +1,7 @@
 {
   "name": "collector-drone-frontend",
   "description": "Companion web-app for Elite: Dangerous, manage blueprints and material inventory for crafting engineer upgrades. Copyright (C) 2016  Frederik Schumacher, Carina Lea Meyer",
-  "version": "1.2.0",
+  "version": "1.3.1",
   "license": "GPL-3.0",
   "private": true,
   "devDependencies": {
@@ -12,6 +12,7 @@
     "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-less": "^1.3.0",
+    "grunt-contrib-pug": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-shell": "^1.3.0"
   },

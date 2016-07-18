@@ -8,7 +8,7 @@
         color: @my-primary;
     }
     .panel-body, .panel-footer {
-        border-color: @my-primary;
+        border-color: @my-primary-muted;
         color: @my-primary-fg;
     }
 }
@@ -120,7 +120,7 @@
 .rarity-standard .material-icon {
     background: rgb(229, 162, 13) url(icons/material-standard.png) no-repeat;
 }
-.panel-title .title {
+.panel-title {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -325,9 +325,9 @@ section.active {
     display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
      .box-expand {
         -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
-        -webkit-flex: 1 0 auto;   /* Chrome */
+        -webkit-flex: 1 0 0;   /* Chrome */
         -ms-flex: 1 0;            /* IE 10 */
-        flex: 1 0 auto;           /* NEW, Spec - Opera 12.1, Firefox 20+ */
+        flex: 1 0 0;           /* NEW, Spec - Opera 12.1, Firefox 20+ */
     }
     .box-shrink {
         -webkit-box-flex: 0;      /* OLD - iOS 6-, Safari 3.1-6 */
