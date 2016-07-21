@@ -48,13 +48,15 @@ html(lang="en")
       integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS",
       crossorigin="anonymous", type="text/javascript")
     script(src="js/libs/backbone.localStorage.js", type="text/javascript")
+    script(src="js/libs/FileSaver.js", type="text/javascript")
     script(src="js/dist/data.1468519306.js", type="text/javascript")
   body
-    include mixins.pug
+    include _mixins.pug
     include _navbar.pug
-    include _about.html
-    include _tracker.pug
-    include _library.pug
+    include about.html
+    include tracker.pug
+    include library.pug
+    include settings.pug
     include _material-tpl.pug
     include _track-material-tpl.pug
     include _blueprint-tpl.pug

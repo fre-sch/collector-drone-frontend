@@ -15,20 +15,24 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+utils = require './utils'
 inventory = require './inventory'
 tracking = require "./tracking"
 TrackBlueprintView = require './TrackBlueprintView'
 TrackMaterialView = require './TrackMaterialView'
 TrackingTabView = require './TrackingTabView'
+SettingsView = require './SettingsView'
 
 
 ### AppView ###
 module.exports = Backbone.View.extend
     el: 'body'
+
     events: {}
+
     initialize: (options) ->
-        {@blueprints, @materials} = options
+        {@blueprints, @materials, @router} = options
+
         @$trackMaterials = $("#tracker-materials")
         @$trackBlueprints = $("#tracker-blueprints")
 
@@ -40,6 +44,8 @@ module.exports = Backbone.View.extend
         @listenTo tracking.materials, "reset", @onTrackMaterialsReset
 
         new TrackingTabView(model: tracking)
+        new SettingsView({@router})
+
         return this
 
     removeTrackMaterial: ->
