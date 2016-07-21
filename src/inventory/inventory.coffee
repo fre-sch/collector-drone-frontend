@@ -22,6 +22,21 @@ InventoryCollection = require './InventoryCollection'
 module.exports =
     collection: new InventoryCollection()
 
+    exportItems: ->
+        results = []
+        for i in [0..localStorage.length]
+            key = localStorage.key(i)
+            if key and key.indexOf("InvMaterial-") == 0
+                item = JSON.parse(localStorage.getItem(key))
+                if item and item.quantity > 0
+                    results.push item
+        results
+
+    reset: (data)->
+        @collection.reset([])
+        for item in data
+            @collection.create(item)
+
     load: ()->
         @collection.fetch(reset: true, silent: true)
 

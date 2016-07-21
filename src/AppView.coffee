@@ -21,17 +21,18 @@ tracking = require "./tracking"
 TrackBlueprintView = require './TrackBlueprintView'
 TrackMaterialView = require './TrackMaterialView'
 TrackingTabView = require './TrackingTabView'
+SettingsView = require './SettingsView'
 
 
 ### AppView ###
 module.exports = Backbone.View.extend
     el: 'body'
 
-    events:
-        "click #export": "exportData"
+    events: {}
 
     initialize: (options) ->
-        {@blueprints, @materials} = options
+        {@blueprints, @materials, @router} = options
+
         @$trackMaterials = $("#tracker-materials")
         @$trackBlueprints = $("#tracker-blueprints")
 
@@ -43,6 +44,8 @@ module.exports = Backbone.View.extend
         @listenTo tracking.materials, "reset", @onTrackMaterialsReset
 
         new TrackingTabView(model: tracking)
+        new SettingsView({@router})
+
         return this
 
     removeTrackMaterial: ->
@@ -92,18 +95,3 @@ module.exports = Backbone.View.extend
             success: createViewAndAppend
 
         return this
-
-    exportData: ()->
-        ids = localStorage.getItem("InvMaterial") or ""
-        ids = ids.split ","
-        data = {}
-        for id in ids
-            key = "InvMaterial-#{id}"
-            item = JSON.parse(localStorage.getItem key)
-            if item.quantity > 0
-                data[key] = item
-
-        dataText = JSON.stringify(data)
-        timestamp = utils.dateFormatted()
-        fileName = "collector-drone.#{timestamp}.txt"
-        saveTextAs(dataText, fileName)

@@ -12,3 +12,9 @@ mixin dropdown(initialText, attrButton, attrMenu)
 
 mixin icon(name)
   span.glyphicon&attributes({class:"glyphicon-"+name})&attributes(attributes)
+
+mixin checkbox(title, id, value)
+  .checkbox
+    label(for=id)
+      input(id=id, type="checkbox", value=value)
+      | #{title}
