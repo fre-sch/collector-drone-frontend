@@ -23,7 +23,7 @@ module.exports = Backbone.Router.extend
     routes:
         "tracker(/:view)": "trackerView"
         "library(/:view)": "libraryView"
-        ":section": "viewScreen"
+        ":section(/*data)": "viewScreen"
 
     initialize: (options)->
         {@blueprintsFiltered, @materialsFiltered} = options

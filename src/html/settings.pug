@@ -1,0 +1,40 @@
+section#settings.container.text-center
+  script#import-data-view(type="text/template")
+    table(style="min-width:50%;margin: 0 auto")
+      <% for (var i=0; i<items.length; ++i) { %>
+        tr
+          td.text-left(style="padding-right:1em;border-bottom:1px dotted black") <%=items[i].title %>
+          td
+            input.form-control(type="number",
+                data-id!="<%=items[i].id%>",
+                value!="<%=items[i].quantity%>",
+                style="width:5em;")
+      <% } %>
+    div(style="margin:1em 0")
+      a.btn.btn-primary(href="#/settings") Cancel
+      a.btn.btn-primary.import(href="#/settings") Import
+
+  #inventory-export
+    h3 Backup
+    p.
+      Save this link to save your current inventory or share it to other
+      browsers/devices.
+    p.
+      Opening the link will show an overview and after you
+      confirm, the inventory will be restored to the data contained in the link.
+    p
+      a#inventory-export-link(href="#",
+        style="width:100%;word-wrap:break-word;")
+
+  #inventory-import
+    h3 Restore
+    .import-result
+
+  //- #inventory-clear
+  //-   h3 Clear inventory
+
+  //-   +checkbox("Commodities", "commodities", "commodities")
+  //-   +checkbox("Manufactured", "manufactured", "manufactured")
+  //-   +checkbox("Data", "data", "data")
+  //-   +checkbox("Elements", "elements", "elements")
+  //-   a.btn.btn-primary Clear inventory

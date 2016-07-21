@@ -18,6 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ###
 
+### App.js ###
 AppView = require "./AppView"
 AppRouter = require "./AppRouter"
 FilteredCollection = require "./FilteredCollection"
@@ -96,68 +97,76 @@ data_migrate = ()->
     $("#drone-data-version").html(localDataVersion())
 
 
-### App.js ###
-App = ->
-    $.ajaxSetup(contentType: "application/json")
+class App
+    constructor: ->
+        $.ajaxSetup(contentType: "application/json")
 
-    data_migrate()
+        data_migrate()
 
-    blueprintsFilter = new BlueprintsFilter
-    blueprintsFiltered = FilteredCollection(
-        new BlueprintCollection, blueprintsFilter)
+        blueprintsFilter = new BlueprintsFilter
+        blueprintsFiltered = FilteredCollection(
+            new BlueprintCollection, blueprintsFilter)
 
-    materialsFilter = new MaterialsFilter
-    materialsFiltered = FilteredCollection(
-        new MaterialCollection, materialsFilter)
+        materialsFilter = new MaterialsFilter
+        materialsFiltered = FilteredCollection(
+            new MaterialCollection, materialsFilter)
 
-    blueprintsFilterView = new BlueprintsFilterView
-        el: $("#library-blueprints-filter")
-        model: blueprintsFilter
+        blueprintsFilterView = new BlueprintsFilterView
+            el: $("#library-blueprints-filter")
+            model: blueprintsFilter
 
-    materialsFilterView = new MaterialsFilterView
-        el: $("#library-materials-filter")
-        model: materialsFilter
+        materialsFilterView = new MaterialsFilterView
+            el: $("#library-materials-filter")
+            model: materialsFilter
 
-    materialsFilterView.typeMenuModel.set
-        items: CollectorDroneData.materialTypes
+        materialsFilterView.typeMenuModel.set
+            items: CollectorDroneData.materialTypes
 
-    blueprintsFilterView.typeMenuModel.set
-        items: CollectorDroneData.blueprintTypes
+        blueprintsFilterView.typeMenuModel.set
+            items: CollectorDroneData.blueprintTypes
 
-    blueprintsFilterView.levelMenuModel.set items:
-        for item in blueprintsFilter.loadLevels()
-            label: item, value: item
+        blueprintsFilterView.levelMenuModel.set items:
+            for item in blueprintsFilter.loadLevels()
+                label: item, value: item
 
-    @resourceTabView = new ResourceTabView
-        blueprintsCollection: blueprintsFiltered
-        materialsCollection: materialsFiltered
+        @resourceTabView = new ResourceTabView
+            blueprintsCollection: blueprintsFiltered
+            materialsCollection: materialsFiltered
 
-    @view = new AppView
-        blueprints: blueprintsFiltered
-        materials: materialsFiltered
+        @view = new AppView
+            blueprints: blueprintsFiltered
+            materials: materialsFiltered
+            router: new AppRouter({blueprintsFiltered, materialsFiltered})
 
-    inventory.load()
-    blueprintsFiltered.resetSource CollectorDroneData.blueprints
-    materialsFiltered.resetSource CollectorDroneData.materials
-    tracking.materials.fetch(reset: true)
-    tracking.blueprints.fetch(reset: true)
+        inventory.load()
+        blueprintsFiltered.resetSource CollectorDroneData.blueprints
+        materialsFiltered.resetSource CollectorDroneData.materials
+        tracking.materials.fetch(reset: true)
+        tracking.blueprints.fetch(reset: true)
 
-    @blueprintsCollectionView = new BlueprintsCollectionView
-        el: $("#library-blueprints .collection-items")
-        model: blueprintsFiltered
-        filter: blueprintsFilter
-        pager: new PagerModel(collection: blueprintsFiltered)
+        @blueprintsCollectionView = new BlueprintsCollectionView
+            el: $("#library-blueprints .collection-items")
+            model: blueprintsFiltered
+            filter: blueprintsFilter
+            pager: new PagerModel(collection: blueprintsFiltered)
 
-    @materialsCollectionView = new MaterialsCollectionView
-        el: $("#library-materials .collection-items")
-        model: materialsFiltered
-        filter: materialsFilter
-        pager: new PagerModel(collection: materialsFiltered)
+        @materialsCollectionView = new MaterialsCollectionView
+            el: $("#library-materials .collection-items")
+            model: materialsFiltered
+            filter: materialsFilter
+            pager: new PagerModel(collection: materialsFiltered)
 
-    @router = new AppRouter({blueprintsFiltered, materialsFiltered})
-    Backbone.history.start()
-    new Ga(Backbone)
+        Backbone.history.start()
+        new Ga(Backbone)
 
-    return this
+        return this
+
+    randomizeInventory: ->
+        for k of localStorage
+            if k.indexOf("InvMaterial-") == 0
+                item = JSON.parse localStorage[k]
+                item.quantity = parseInt Math.random() * 255
+                localStorage[k] = JSON.stringify item
+        this
 
 window.app = new App()

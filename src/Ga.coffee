@@ -31,6 +31,7 @@ module.exports = class Ga
         model.on "action:blueprint:craft", @sendBlueprintCraft
         model.on "action:inventory:plus", @sendInventoryPlus
         model.on "action:inventory:minus", @sendInventoryMinus
+        model.on "action:inventory:restore", @sendInventoryRestore
         model.on "action:blueprint:filter", @sendBlueprintFilter
         model.on "action:material:filter", @sendMaterialFilter
         model.on "action:section", @sendScreenView
@@ -66,6 +67,12 @@ module.exports = class Ga
             eventAction: "minus"
             eventLabel: "Decrease material inventory"
 
+    @sendInventoryRestore: ()->
+        window.ga "send", "event",
+            eventCategory: "inventory"
+            eventAction: "restore"
+            eventLabel: "Restore material inventory"
+
     sendBlueprintFilter: ()->
         window.ga "send", "event",
             eventCategory: "blueprint"
@@ -82,7 +89,8 @@ module.exports = class Ga
         window.ga "send", "screenview", screenName: view
 
     sendMigrateEvent: (prev, next)->
-        window.ga "send", "screenview", screenName: main
+        window.ga "send", "screenview",
+            screenName: "main"
         window.ga "send", "event",
             eventCategory: "migrate"
             eventAction: "update"

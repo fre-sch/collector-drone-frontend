@@ -16,49 +16,21 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+### CodecV1 ###
+module.exports =
+    ID: "V1-"
 
-### utils ###
+    encode: (items)->
+        data = []
+        for item, i in items
+            data.push Math.min(255, item.id)
+            data.push Math.min(255, item.quantity)
+        str = String.fromCharCode.apply(null, data)
+        @ID + btoa(str)
 
-hasFileDownload = try
-     !!new Blob
-catch
-    false
-
-hasFileReader = try
-    !!new FileReader
-catch
-    false
-
-strcmp = (a, b) ->
-    a.localeCompare(b)
-
-
-numcmp = (a, b) ->
-    if a > b then 1 else -1
-
-
-cmp = (a, b) ->
-    if not a
-        return 1
-    else if not b
-        return -1
-    else if a.localeCompare
-        strcmp(a, b)
-    else
-        numcmp(a, b)
-
-
-dateFormatted = ()->
-    now = new Date()
-    y = now.getUTCFullYear()
-    m = now.getUTCMonth() + 1
-    m = "0#{m}".slice -2
-    d = now.getUTCDate()
-    d = "0#{d}".slice -2
-    s = now.getUTCHours() * 60 * 60
-    s += now.getUTCMinutes() * 60
-    s += now.getUTCSeconds()
-    "#{y}-#{m}-#{d}.#{s}"
-
-
-module.exports = {strcmp, numcmp, cmp, dateFormatted, hasFileReader, hasFileDownload}
+    decode: (versionedData)->
+        encodedData = versionedData.slice(@ID.length)
+        binaryData = atob(encodedData)
+        for c, i in binaryData by 2
+            id: c.charCodeAt(0)
+            quantity: binaryData.charCodeAt(i+1)
