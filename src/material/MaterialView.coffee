@@ -77,8 +77,10 @@ module.exports = Backbone.View.extend
         this
 
     toggleNextBody: (e)->
-        $(e.currentTarget).next().slideToggle(80)
-        $(e.currentTarget).find(".glyphicon")
-            .toggleClass("glyphicon-triangle-bottom")
-            .toggleClass("glyphicon-triangle-top")
+        $next = $(e.currentTarget).next(".panel-body")
+        if $next
+            $next.slideToggle(80)
+            $(e.currentTarget).find(".glyphicon")
+                .toggleClass("glyphicon-triangle-bottom")
+                .toggleClass("glyphicon-triangle-top")
         this

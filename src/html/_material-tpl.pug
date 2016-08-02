@@ -4,16 +4,24 @@ script#material-tpl(type="text/template")
       span.box-shrink.material-icon(title!="<%=rarity%>")
       span.box-expand.panel-title(title!="<%=title%>") <%=title%>
       span.box-shrink.badge(title!="<%=type%>") <%=type%>
-    .panel-body.toggle.box.box-items-centered
-      span.title.box-expand Locations
-      span.icon.box-shrink: +icon("triangle-top")
-    .panel-body.
-      <%
-      var titles = locations.map(function(it){return it.title});
-      titles.sort(function(a,b){return a.length-b.length});
-      for(var i=0; i<titles.length; ++i) { %>
-          <span class="location"><%=titles[i]%></span>
+      
+    <% for (var i=0; i < locations.length; ++i) { var location=locations[i]; %>
+    
+    <div class="panel-body box box-items-centered <%=(location.details?"toggle":"")%>">
+      span.title.box-expand <%=(location.category=="mission"?"Mission Reward: ":"")%><%=location.title%>
+      <% if (location.details) { %>
+      span.icon.box-shrink: +icon("triangle-bottom")
       <% } %>
+    </div>
+    
+    <% if (location.details) { %>
+    .panel-body(style="display:none").
+      <% for (var dt=location.details.split(";"), j = 0; j < dt.length; ++j) { var detail=dt[j]; %>
+      <span class="location"><%=detail%></span>
+      <% } %>
+    <% } %>
+    
+    <% } %>
     .panel-footer.box.box-items-centered
       span.box-expand.title &nbsp;
       span.box-expand.title Inventory
