@@ -87,8 +87,3 @@ module.exports = Backbone.View.extend
             @$el.find(".import-result").html "<p>Failed to import data: #{e}</p>"
 
         return this
-
-    # exportFile: ()->
-    #     timestamp = utils.dateFormatted()
-    #     fileName = "collector-drone.#{timestamp}.txt"
-    #     saveTextAs @inventoryExport(), fileName
