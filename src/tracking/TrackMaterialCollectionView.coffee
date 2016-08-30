@@ -15,50 +15,25 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-utils = require './utils'
-inventory = require './inventory'
 tracking = require "./tracking"
-TrackBlueprintView = require './TrackBlueprintView'
-TrackMaterialView = require './TrackMaterialView'
-TrackingTabView = require './TrackingTabView'
-SettingsView = require './SettingsView'
+inventory = require "./inventory"
+TrackMaterialView = require "./TrackMaterialView"
 
 
-### AppView ###
+### TrackMaterialCollectionView ###
 module.exports = Backbone.View.extend
-    el: 'body'
+    el: $("#tracker-materials")
 
-    events: {}
-
-    initialize: (options) ->
-        {@blueprints, @materials, @router} = options
-
-        @$trackMaterials = $("#tracker-materials")
-        @$trackBlueprints = $("#tracker-blueprints")
-
-        @listenTo tracking.blueprints, "add", @addTrackBlueprint
+    initialize: (options)->
+        {@materials} = options
         @listenTo tracking.materials, "add", @addTrackMaterial
-        @listenTo tracking.blueprints, "remove", @removeTrackBlueprint
         @listenTo tracking.materials, "remove", @removeTrackMaterial
-        @listenTo tracking.blueprints, "reset", @onTrackBlueprintsReset
         @listenTo tracking.materials, "reset", @onTrackMaterialsReset
-
-        new TrackingTabView(model: tracking)
-        new SettingsView({@router})
-
         return this
 
     removeTrackMaterial: ->
         if not tracking.materials.length and not tracking.blueprints.length
             $("#introduction").show()
-
-    removeTrackBlueprint: ->
-        if not tracking.materials.length and not tracking.blueprints.length
-            $("#introduction").show()
-
-    onTrackBlueprintsReset: (collection, options) ->
-        for model in collection.models
-            @addTrackBlueprint(model)
         return this
 
     onTrackMaterialsReset: (collection, options) ->
@@ -73,25 +48,11 @@ module.exports = Backbone.View.extend
                 material: material
                 inventory: inventory.getItem(trackMaterial.id)
             $("#introduction").hide()
-            @$trackMaterials.append(view.render().el)
+            @$el.append(view.render().el)
             return
         , this, trackMaterial)
 
         @materials.getOrFetch trackMaterial.id,
-            success: createViewAndAppend
-
-        return this
-
-    addTrackBlueprint: (trackBlueprint) ->
-        createViewAndAppend = _.bind((trackBlueprint, blueprint) ->
-            view = new TrackBlueprintView
-                model: {trackBlueprint, blueprint}
-            $("#introduction").hide()
-            @$trackBlueprints.append view.render().el
-            return this
-        , this, trackBlueprint)
-
-        @blueprints.getOrFetch trackBlueprint.id,
             success: createViewAndAppend
 
         return this

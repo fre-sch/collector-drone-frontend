@@ -19,7 +19,6 @@
 ###
 
 ### App.js ###
-AppView = require "./AppView"
 AppRouter = require "./AppRouter"
 FilteredCollection = require "./FilteredCollection"
 PagerModel = require "./PagerModel"
@@ -33,6 +32,10 @@ MaterialsFilter = require "./MaterialsFilter"
 MaterialsFilterView = require "./MaterialsFilterView"
 ResourceTabView = require "./ResourceTabView"
 tracking = require './tracking'
+TrackBlueprintCollectionView = require './TrackBlueprintCollectionView'
+TrackMaterialCollectionView = require './TrackMaterialCollectionView'
+TrackingTabView = require './TrackingTabView'
+SettingsView = require './SettingsView'
 inventory = require './inventory'
 Ga = require './Ga'
 
@@ -133,10 +136,11 @@ class App
             blueprintsCollection: blueprintsFiltered
             materialsCollection: materialsFiltered
 
-        @view = new AppView
-            blueprints: blueprintsFiltered
-            materials: materialsFiltered
-            router: new AppRouter({blueprintsFiltered, materialsFiltered})
+        new TrackBlueprintCollectionView blueprints: blueprintsFiltered
+        new TrackMaterialCollectionView materials: materialsFiltered
+        new TrackingTabView(model: tracking)
+        @router = new AppRouter({blueprintsFiltered, materialsFiltered})
+        new SettingsView({@router})
 
         inventory.load()
         blueprintsFiltered.resetSource CollectorDroneData.blueprints
