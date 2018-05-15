@@ -37,7 +37,6 @@ TrackMaterialCollectionView = require './TrackMaterialCollectionView'
 TrackingTabView = require './TrackingTabView'
 SettingsView = require './SettingsView'
 inventory = require './inventory'
-Ga = require './Ga'
 
 
 ### 2016-07-04 ###
@@ -161,7 +160,6 @@ class App
             pager: new PagerModel(collection: materialsFiltered)
 
         Backbone.history.start()
-        new Ga(Backbone)
 
         return this
 
